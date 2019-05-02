@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Tongits</string>
+    <string name="edit_message">~Tongits~</string>
+    <string name="button_send">Play</string>
 </resources>
