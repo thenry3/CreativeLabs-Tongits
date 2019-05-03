@@ -26,13 +26,11 @@ public class Deck {
         Random random = new Random();
 
         //For every card location, choose a random int and switch
-        for (int i = 0; i < numberOfCardsInDeck; i++)
-        {
+        for (int i = 0; i < numberOfCardsInDeck; i++) {
             Card tempcard = card_deck[i];
             card_deck[i] = card_deck[random.nextInt() % 53];
             card_deck[i] = tempcard;
         }
-
     }
 
     public int getNumberOfCardsInDeck()
