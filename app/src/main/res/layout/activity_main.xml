@@ -47,6 +47,7 @@
         android:textSize="48sp"
         android:textStyle="bold"
         android:typeface="serif"
+        android:onClick="onClickPlay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
