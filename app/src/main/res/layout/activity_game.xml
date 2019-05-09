@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".Game">
 
+    <ImageView
+        android:id="@+id/cardDeck"
+        android:layout_width="121dp"
+        android:layout_height="140dp"
+        app:srcCompat="?attr/actionModeSplitBackground"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="182dp" />
 </android.support.constraint.ConstraintLayout>
