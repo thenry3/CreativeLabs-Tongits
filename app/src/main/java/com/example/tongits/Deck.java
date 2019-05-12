@@ -42,10 +42,12 @@ public class Deck {
         return card_deck;
     }
 
+    // get the topcard of the deck
     public Card topCard(){
         return card_deck.get(card_deck.size() - 1);
     }
 
+    //remove the top card in the deck
     public void removeCard(){
         if (getNumberOfCardsInDeck() > 0) {
             card_deck.remove(getNumberOfCardsInDeck() - 1);
