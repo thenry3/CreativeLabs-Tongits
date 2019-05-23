@@ -6,4 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".Game">
 
+    <ImageView
+        android:id="@+id/cardDeck"
+        android:layout_width="121dp"
+        android:layout_height="140dp"
+        app:srcCompat="?attr/actionModeSplitBackground"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="182dp" />
+
+    <HorizontalScrollView
+        android:layout_width="396dp"
+        android:layout_height="133dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="7dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+    </HorizontalScrollView>
+
 </android.support.constraint.ConstraintLayout>
