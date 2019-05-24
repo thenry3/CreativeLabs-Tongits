@@ -42,6 +42,7 @@ public class Game extends AppCompatActivity {
 
         mainDeckView = findViewById(R.id.cardDeck);
         viewHand = findViewById(R.id.playerHand);
+        viewHand.getLayoutParams().width = 100;
 
         final Deck deckOfCards = new Deck();
 
@@ -64,8 +65,10 @@ public class Game extends AppCompatActivity {
         dealCards(deckOfCards, AI1Hand, 12);
         dealCards(deckOfCards, AI2Hand, 12);
 
+        // update player hand view
         updateHand();
 
+        //button to allow player to draw card from main deck
         mainDeckView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,21 +81,7 @@ public class Game extends AppCompatActivity {
                 }
             });
 
-//        updateHand();
-//
-//        while (deckOfCards.getNumberOfCardsInDeck() > 0) { //while there are cards in draw deck
-//            updateHand();
-//            // button listener to take card from main deck
-//            mainDeckView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                 if (playerDrawTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
-//                        playerHand.add(deckOfCards.topCard());
-//                        deckOfCards.removeCard();
-//                        playerDrawTurn = false;
-//                    }
-//                }
-//            });
+
 
 //            updateHand();
 //
