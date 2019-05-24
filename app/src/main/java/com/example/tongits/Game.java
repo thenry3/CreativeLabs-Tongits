@@ -46,12 +46,8 @@ public class Game extends AppCompatActivity {
 
         final Deck deckOfCards = new Deck();
 
-        for (int i = 0; i < deckOfCards.getNumberOfCardsInDeck(); i++) {
-            Log.d("ADebugTag", "Value: " + deckOfCards.getCardDeck().get(i).getSuit() + deckOfCards.getCardDeck().get(i).getSuit());
-        }
-
         //shuffle a few times for good measure
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 20; i++){
             deckOfCards.shuffleDeck();
         }
 
@@ -146,97 +142,93 @@ public class Game extends AppCompatActivity {
     // update the player's hand on screen
     void updateHand(){
         viewHand.removeAllViews();
-        for (int i = 0; i < playerHand.size(); i++)
-        {
+        for (int i = 0; i < playerHand.size(); i++) {
             ImageButton card = new ImageButton(this);
-
-            // Depending on the suit and card, update the card's photo
-            switch(playerHand.get(i).getSuit())
-            {
-                case 1:
-                    switch(playerHand.get(i).getValue())
-                    {
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                        case 11:
-                        case 12:
-                        case 13:
-                            card.setBackgroundResource(R.drawable.ic_launcher_foreground);
-                            break;
-                    }
-                    break;
-                case 2:
-                    switch(playerHand.get(i).getValue())
-                    {
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                        case 11:
-                        case 12:
-                        case 13:
-                            card.setBackgroundResource(R.drawable.ic_launcher_foreground);
-                            break;
-                    }
-                    break;
-                case 3:
-                    switch(playerHand.get(i).getValue())
-                    {
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                        case 11:
-                        case 12:
-                        case 13:
-                            card.setBackgroundResource(R.drawable.ic_launcher_foreground);
-                            break;
-                    }
-                    break;
-                case 4:
-                    switch(playerHand.get(i).getValue())
-                    {
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                        case 11:
-                        case 12:
-                        case 13:
-                            card.setBackgroundResource(R.drawable.ic_launcher_foreground);
-                            break;
-                    }
-                    break;
-            }
+            setNewCardImage(playerHand.get(i).getSuit(), playerHand.get(i).getValue(), card);
             viewHand.addView(card);
         }
+    }
 
-//        this.setContentView(viewHand);
+    // Depending on the suit and card, update the card's photo
+    void setNewCardImage(int suit, int value, View card)
+    {
+        switch (suit) {
+            case 1:
+                switch (value) {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        break;
+                }
+                break;
+            case 2:
+                switch (value) {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        break;
+                }
+                break;
+            case 3:
+                switch (value) {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        break;
+                }
+                break;
+            case 4:
+                switch (value) {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        break;
+                }
+                break;
+        }
     }
 }
