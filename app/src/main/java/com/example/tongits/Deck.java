@@ -1,6 +1,5 @@
 package com.example.tongits;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Deck {
 
@@ -25,8 +24,8 @@ public class Deck {
         Random random = new Random();
 
         //For every card location, choose a random int and switch
-        for (int i = 0; i < getNumberOfCardsInDeck(); i++) {
-            int randomInt = random.nextInt() % 53;
+        for (int i = 0; i < card_deck.size(); i++) {
+            int randomInt = random.nextInt(card_deck.size());
             Card tempcard = card_deck.get(i);
             card_deck.set(i, card_deck.get(randomInt));
             card_deck.set(randomInt, tempcard);

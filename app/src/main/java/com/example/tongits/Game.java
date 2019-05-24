@@ -4,6 +4,7 @@ import android.support.annotation.DrawableRes;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import java.util.*;
@@ -43,6 +44,10 @@ public class Game extends AppCompatActivity {
 
         final Deck deckOfCards = new Deck();
 
+        for (int i = 0; i < deckOfCards.getNumberOfCardsInDeck(); i++) {
+            Log.d("ADebugTag", "Value: " + deckOfCards.getCardDeck().get(i).getSuit() + deckOfCards.getCardDeck().get(i).getSuit());
+        }
+
         //shuffle a few times for good measure
         for (int i = 0; i < 5; i++){
             deckOfCards.shuffleDeck();
@@ -58,15 +63,10 @@ public class Game extends AppCompatActivity {
         dealCards(deckOfCards, AI1Hand, 12);
         dealCards(deckOfCards, AI2Hand, 12);
 
-        updateHand();
-
-        while (deckOfCards.getNumberOfCardsInDeck() > 0) { //while there are cards in draw deck
-            updateHand();
-            // button listener to take card from main deck
-            mainDeckView.setOnClickListener(new View.OnClickListener() {
+        mainDeckView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (playerDrawTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
+                 if (playerDrawTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
                         playerHand.add(deckOfCards.topCard());
                         deckOfCards.removeCard();
                         playerDrawTurn = false;
@@ -74,11 +74,27 @@ public class Game extends AppCompatActivity {
                 }
             });
 
-            updateHand();
+//        updateHand();
+//
+//        while (deckOfCards.getNumberOfCardsInDeck() > 0) { //while there are cards in draw deck
+//            updateHand();
+//            // button listener to take card from main deck
+//            mainDeckView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                 if (playerDrawTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
+//                        playerHand.add(deckOfCards.topCard());
+//                        deckOfCards.removeCard();
+//                        playerDrawTurn = false;
+//                    }
+//                }
+//            });
 
-            AITurn(deckOfCards);
-
-        }
+//            updateHand();
+//
+//            AITurn(deckOfCards);
+//
+//        }
 
 
     }

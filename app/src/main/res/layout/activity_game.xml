@@ -10,21 +10,26 @@
         android:id="@+id/cardDeck"
         android:layout_width="121dp"
         android:layout_height="140dp"
-        app:srcCompat="?attr/actionModeSplitBackground"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="182dp" />
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginRight="144dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeSplitBackground" />
 
     <HorizontalScrollView
         android:layout_width="396dp"
         android:layout_height="133dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="7dp">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
 </android.support.constraint.ConstraintLayout>
