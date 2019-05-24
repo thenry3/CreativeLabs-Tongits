@@ -19,7 +19,7 @@ public class Game extends AppCompatActivity {
     boolean gameFinished = false; // keeps track of when game ends
 
     ImageView mainDeckView; //the icon for the main deck
-    HorizontalScrollView viewHand; //holds player's cards
+    LinearLayout viewHand; //holds player's cards
 
 
     ArrayList<Card> playerHand; //array to hold player's cards
@@ -41,6 +41,7 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         mainDeckView = findViewById(R.id.cardDeck);
+        viewHand = findViewById(R.id.playerHand);
 
         final Deck deckOfCards = new Deck();
 
@@ -63,12 +64,15 @@ public class Game extends AppCompatActivity {
         dealCards(deckOfCards, AI1Hand, 12);
         dealCards(deckOfCards, AI2Hand, 12);
 
+        updateHand();
+
         mainDeckView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                  if (playerDrawTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
                         playerHand.add(deckOfCards.topCard());
                         deckOfCards.removeCard();
+                        updateHand();
                         playerDrawTurn = false;
                     }
                 }
@@ -179,6 +183,7 @@ public class Game extends AppCompatActivity {
                             card.setBackgroundResource(R.drawable.ic_launcher_foreground);
                             break;
                     }
+                    break;
                 case 2:
                     switch(playerHand.get(i).getValue())
                     {
@@ -198,6 +203,7 @@ public class Game extends AppCompatActivity {
                             card.setBackgroundResource(R.drawable.ic_launcher_foreground);
                             break;
                     }
+                    break;
                 case 3:
                     switch(playerHand.get(i).getValue())
                     {
@@ -217,6 +223,7 @@ public class Game extends AppCompatActivity {
                             card.setBackgroundResource(R.drawable.ic_launcher_foreground);
                             break;
                     }
+                    break;
                 case 4:
                     switch(playerHand.get(i).getValue())
                     {
@@ -236,10 +243,11 @@ public class Game extends AppCompatActivity {
                             card.setBackgroundResource(R.drawable.ic_launcher_foreground);
                             break;
                     }
+                    break;
             }
             viewHand.addView(card);
         }
 
-        this.setContentView(viewHand);
+//        this.setContentView(viewHand);
     }
 }
