@@ -20,6 +20,9 @@ public class Game extends AppCompatActivity {
 
     ImageView mainDeckView; //the icon for the main deck
     LinearLayout viewHand; //holds player's cards
+    ImageButton AI1DiscardView;
+    ImageButton playerDiscardView;
+    ImageButton AI2DiscardView;
 
 
     ArrayList<Card> playerHand; //array to hold player's cards
@@ -40,9 +43,13 @@ public class Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        // initialize variables with Views
         mainDeckView = findViewById(R.id.cardDeck);
         viewHand = findViewById(R.id.playerHand);
         viewHand.getLayoutParams().width = 100;
+        AI1DiscardView = findViewById(R.id.AI1DiscardPile);
+        AI2DiscardView = findViewById(R.id.AI2DiscardPile);
+        playerDiscardView = findViewById(R.id.playerDiscardPile);
 
         final Deck deckOfCards = new Deck();
 
@@ -61,6 +68,11 @@ public class Game extends AppCompatActivity {
         dealCards(deckOfCards, AI1Hand, 12);
         dealCards(deckOfCards, AI2Hand, 12);
 
+        // initialize discard piles
+        AI1Discard = new ArrayList<>();
+        AI2Discard = new ArrayList<>();
+        playerDiscard = new ArrayList<>();
+
         // update player hand view
         updateHand();
 
@@ -73,17 +85,31 @@ public class Game extends AppCompatActivity {
                         deckOfCards.removeCard();
                         updateHand();
                         playerDrawTurn = false;
+                        AITurn(deckOfCards);
                     }
                 }
             });
 
+        AI1DiscardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
-//            updateHand();
-//
-//            AITurn(deckOfCards);
-//
-//        }
+        AI2DiscardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        playerDiscardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
     }
@@ -118,14 +144,16 @@ public class Game extends AppCompatActivity {
         int highcardindex = findHighestCard(AI1Hand);
         AI1Discard.add(AI1Hand.get(highcardindex));
         AI1Hand.remove(highcardindex);
+        setNewCardImage(AI1Discard.get(AI1Discard.size() - 1).getSuit(), AI1Discard.get(AI1Discard.size() - 1).getValue(), AI1DiscardView);
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        }
-        catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
-        }
+
+//        try {
+//            TimeUnit.SECONDS.sleep(2);
+//        }
+//        catch(InterruptedException ex)
+//        {
+//            Thread.currentThread().interrupt();
+//        }
 
         // AI 2 turn
         AI2Hand.add(deck.topCard());
@@ -133,6 +161,7 @@ public class Game extends AppCompatActivity {
         highcardindex = findHighestCard(AI2Hand);
         AI2Discard.add(AI2Hand.get(highcardindex));
         AI2Hand.remove(highcardindex);
+        setNewCardImage(AI2Discard.get(AI2Discard.size() - 1).getSuit(), AI2Discard.get(AI2Discard.size() - 1).getValue(), AI2DiscardView);
 
         playerDrawTurn = true; //end AIs' turns
 
