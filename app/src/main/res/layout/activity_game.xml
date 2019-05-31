@@ -6,25 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".Game">
 
+    <TextView
+        android:id="@+id/AI1Label"
+        android:layout_width="93dp"
+        android:layout_height="25dp"
+        android:text="Opponent 1"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.993"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <ImageButton
+        android:id="@+id/AI1DiscardPile"
+        android:layout_width="79dp"
+        android:layout_height="100dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.026" />
+
+    <ImageButton
+        android:id="@+id/playerDiscardPile"
+        android:layout_width="79dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.746" />
+
     <ImageView
         android:id="@+id/cardDeck"
         android:layout_width="121dp"
         android:layout_height="140dp"
-        app:srcCompat="?attr/actionModeSplitBackground"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="182dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.357"
+        app:srcCompat="?attr/actionModeSplitBackground" />
 
     <HorizontalScrollView
         android:layout_width="396dp"
         android:layout_height="133dp"
-        android:layout_marginBottom="16dp"
+        android:fadeScrollbars="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:scrollbars="none"
+        android:splitMotionEvents="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="7dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.973">
 
         <LinearLayout
+            android:id="@+id/playerHand"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
+
+    <ImageButton
+        android:id="@+id/AI2DiscardPile"
+        android:layout_width="79dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.746" />
+
+    <TextView
+        android:id="@+id/AI2Label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opponent 2"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
 
 </android.support.constraint.ConstraintLayout>
