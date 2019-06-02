@@ -1,15 +1,13 @@
 package com.example.tongits;
 
-import android.support.annotation.DrawableRes;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import android.graphics.drawable.*;
+import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
+import android.view.ViewGroup.*;
 
 
 public class Game extends AppCompatActivity {
@@ -174,7 +172,14 @@ public class Game extends AppCompatActivity {
         for (int i = 0; i < playerHand.size(); i++) {
             ImageButton card = new ImageButton(this);
             setNewCardImage(playerHand.get(i).getSuit(), playerHand.get(i).getValue(), card);
+            card.setAdjustViewBounds(true);
+            card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
             viewHand.addView(card);
+
+            View space = new Space(this);
+            space.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
+            viewHand.addView(space);
+
         }
     }
 
@@ -197,7 +202,7 @@ public class Game extends AppCompatActivity {
                     case 11:
                     case 12:
                     case 13:
-                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        card.setBackgroundResource(R.drawable.clubs2);
                         break;
                 }
                 break;
@@ -216,7 +221,7 @@ public class Game extends AppCompatActivity {
                     case 11:
                     case 12:
                     case 13:
-                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        card.setBackgroundResource(R.drawable.clubs2);
                         break;
                 }
                 break;
@@ -235,7 +240,7 @@ public class Game extends AppCompatActivity {
                     case 11:
                     case 12:
                     case 13:
-                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        card.setBackgroundResource(R.drawable.clubs2);
                         break;
                 }
                 break;
@@ -254,10 +259,11 @@ public class Game extends AppCompatActivity {
                     case 11:
                     case 12:
                     case 13:
-                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        card.setBackgroundResource(R.drawable.clubs2);
                         break;
                 }
                 break;
         }
+
     }
 }
