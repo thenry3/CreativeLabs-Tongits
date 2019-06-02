@@ -19,10 +19,7 @@ public class Game extends AppCompatActivity {
 
     ImageView mainDeckView; //the icon for the main deck
     LinearLayout viewHand; //holds player's cards
-    LinearLayout AI1DiscardPilePage;
-
-    LinearLayout AI2DiscardPilePage;
-    LinearLayout PlayerDiscardPilePage;
+    LinearLayout DiscardPilePage;
 
     ImageButton AI1DiscardView;
     ImageButton playerDiscardView;
@@ -60,7 +57,7 @@ public class Game extends AppCompatActivity {
         viewHand = findViewById(R.id.playerHand);
         viewHand.getLayoutParams().width = 100;
 
-        AI1DiscardPilePage = findViewById(R.id.AI1DiscardPilePage); //this line matters! links to the name of the linear layout in the XML file
+        DiscardPilePage = findViewById(R.id.AI1DiscardPilePage); //this line matters! links to the name of the linear layout in the XML file
 
 
         AI1DiscardView = findViewById(R.id.AI1DiscardPile);
@@ -114,20 +111,20 @@ public class Game extends AppCompatActivity {
         AI1DiscardView.setOnClickListener(new View.OnClickListener() { //this is for the first AI view
             @Override
             public void onClick(View v) {
-                updateAI1DiscardPile(1);
+                updateDiscardPile(1);
                 activeAI1 = !activeAI1;
 
                 if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
-                    AI1DiscardPilePage.setVisibility(View.GONE);
+                    DiscardPilePage.setVisibility(View.GONE);
                     tracker1=tracker2=playertracker=0;
                 }
                 else{
-                    AI1DiscardPilePage.setVisibility(View.VISIBLE);
+                    DiscardPilePage.setVisibility(View.VISIBLE);
 
                 tracker1++;
                 tracker2=playertracker=0;
                 if (tracker1>=2) { //this line jank asf
-                    AI1DiscardPilePage.setVisibility(View.GONE);
+                    DiscardPilePage.setVisibility(View.GONE);
                     tracker1 =0;
                 }}
             }
@@ -137,20 +134,20 @@ public class Game extends AppCompatActivity {
         AI2DiscardView.setOnClickListener(new View.OnClickListener() { //this is for the first AI view
             @Override
             public void onClick(View v) {
-                updateAI1DiscardPile(2);
+                updateDiscardPile(2);
                 activeAI2 = !activeAI2;
 
                 if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
-                    AI1DiscardPilePage.setVisibility(View.GONE);
+                    DiscardPilePage.setVisibility(View.GONE);
                     tracker1=tracker2=playertracker=0;
                 }
                 else{
-                    AI1DiscardPilePage.setVisibility(View.VISIBLE);
+                    DiscardPilePage.setVisibility(View.VISIBLE);
 
                 tracker2++;
                 tracker1=playertracker=0;
                 if (tracker2>=2) { //this line jank asf
-                    AI1DiscardPilePage.setVisibility(View.GONE);
+                    DiscardPilePage.setVisibility(View.GONE);
                     tracker2 =0;
                 }}
             }
@@ -159,14 +156,14 @@ public class Game extends AppCompatActivity {
         playerDiscardView.setOnClickListener(new View.OnClickListener() { //this is for the first AI view
             @Override
             public void onClick(View v) {
-                updateAI1DiscardPile(3);
+                updateDiscardPile(3);
                 activePlayer = !activePlayer;
                 if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
-                    AI1DiscardPilePage.setVisibility(View.GONE);
+                    DiscardPilePage.setVisibility(View.GONE);
                     tracker1=tracker2=playertracker=0;
                 }
                 else
-                    AI1DiscardPilePage.setVisibility(View.VISIBLE);
+                    DiscardPilePage.setVisibility(View.VISIBLE);
             }
         });
 
@@ -244,46 +241,48 @@ public class Game extends AppCompatActivity {
 
         }
     }
-    void updateAI1DiscardPile(int ai) { //1 = ai1, 2 = ai2, 3 = player
-        AI1DiscardPilePage.removeAllViews();
+    void updateDiscardPile(int ai) { //1 = ai1, 2 = ai2, 3 = player
+        DiscardPilePage.removeAllViews();
         if (ai == 1) {
             for (int i = 0; i < AI1Discard.size(); i++) {
                 ImageButton card = new ImageButton(this);
                 setNewCardImage(AI1Discard.get(i).getSuit(), AI1Discard.get(i).getValue(), card);
-                AI1DiscardPilePage.addView(card);
+                card.setAdjustViewBounds(true);
+                card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
+                DiscardPilePage.addView(card);
+
+                View space = new Space(this);
+                space.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
+                DiscardPilePage.addView(space);
             }
         } else if (ai == 2) {
             for (int i = 0; i < AI2Discard.size(); i++) {
                 ImageButton card = new ImageButton(this);
                 setNewCardImage(AI2Discard.get(i).getSuit(), AI2Discard.get(i).getValue(), card);
-                AI1DiscardPilePage.addView(card);
+                card.setAdjustViewBounds(true);
+                card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
+                DiscardPilePage.addView(card);
+
+                View space = new Space(this);
+                space.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
+                DiscardPilePage.addView(space);
             }
         }
         else if (ai == 3){
             for (int i = 0; i < playerDiscard.size(); i++) {
                 ImageButton card = new ImageButton(this);
                 setNewCardImage(playerDiscard.get(i).getSuit(), playerDiscard.get(i).getValue(), card);
-                AI1DiscardPilePage.addView(card);
+                card.setAdjustViewBounds(true);
+                card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
+                DiscardPilePage.addView(card);
+
+                View space = new Space(this);
+                space.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
+                DiscardPilePage.addView(space);
             }
         }
     }
 
-   /* void updateAI2DiscardPile(){
-        AI2DiscardPilePage.removeAllViews();
-        for (int i = 0; i < AI2Discard.size(); i++) {
-            ImageButton card = new ImageButton(this);
-            setNewCardImage(AI2Discard.get(i).getSuit(), AI2Discard.get(i).getValue(), card);
-            AI2DiscardPilePage.addView(card);
-        }
-    }
-    void updatePlayerDiscardPile(){
-        PlayerDiscardPilePage.removeAllViews();
-        for (int i = 0; i < playerDiscard.size(); i++) {
-            ImageButton card = new ImageButton(this);
-            setNewCardImage(playerDiscard.get(i).getSuit(), playerDiscard.get(i).getValue(), card);
-            PlayerDiscardPilePage.addView(card);
-        }
-    }*/
     // Depending on the suit and card, update the card's photo
     void setNewCardImage(int suit, int value, View card)
     {
