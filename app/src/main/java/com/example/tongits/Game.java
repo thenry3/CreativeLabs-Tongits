@@ -1,15 +1,10 @@
 package com.example.tongits;
 
-import android.support.annotation.DrawableRes;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import android.graphics.drawable.*;
 
 
 public class Game extends AppCompatActivity {
@@ -45,6 +40,7 @@ public class Game extends AppCompatActivity {
 
         // initialize variables with Views
         mainDeckView = findViewById(R.id.cardDeck);
+        mainDeckView.setImageResource(R.drawable.back);
         viewHand = findViewById(R.id.playerHand);
         viewHand.getLayoutParams().width = 100;
         AI1DiscardView = findViewById(R.id.AI1DiscardPile);
@@ -174,7 +170,14 @@ public class Game extends AppCompatActivity {
         for (int i = 0; i < playerHand.size(); i++) {
             ImageButton card = new ImageButton(this);
             setNewCardImage(playerHand.get(i).getSuit(), playerHand.get(i).getValue(), card);
+            card.setAdjustViewBounds(true);
+            card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
             viewHand.addView(card);
+
+            View space = new Space(this);
+            space.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
+            viewHand.addView(space);
+
         }
     }
 
@@ -185,79 +188,176 @@ public class Game extends AppCompatActivity {
             case 1:
                 switch (value) {
                     case 1:
+                        card.setBackgroundResource(R.drawable.spades_a);
+                        break;
                     case 2:
+                        card.setBackgroundResource(R.drawable.spades_2);
+                        break;
                     case 3:
+                        card.setBackgroundResource(R.drawable.spades_3);
+                        break;
                     case 4:
+                        card.setBackgroundResource(R.drawable.spades_4);
+                        break;
                     case 5:
+                        card.setBackgroundResource(R.drawable.spades_5);
+                        break;
                     case 6:
+                        card.setBackgroundResource(R.drawable.spades_6);
+                        break;
                     case 7:
+                        card.setBackgroundResource(R.drawable.spades_7);
+                        break;
                     case 8:
+                        card.setBackgroundResource(R.drawable.spades_8);
+                        break;
                     case 9:
+                        card.setBackgroundResource(R.drawable.spades_9);
+                        break;
                     case 10:
+                        card.setBackgroundResource(R.drawable.spades_10);
+                        break;
                     case 11:
+                        card.setBackgroundResource(R.drawable.spades_j);
+                        break;
                     case 12:
+                        card.setBackgroundResource(R.drawable.spades_q);
+                        break;
                     case 13:
-                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        card.setBackgroundResource(R.drawable.spades_k);
                         break;
                 }
                 break;
             case 2:
                 switch (value) {
                     case 1:
+                        card.setBackgroundResource(R.drawable.clubs_a);
+                        break;
                     case 2:
+                        card.setBackgroundResource(R.drawable.clubs_2);
+                        break;
                     case 3:
+                        card.setBackgroundResource(R.drawable.clubs_3);
+                        break;
                     case 4:
+                        card.setBackgroundResource(R.drawable.clubs_4);
+                        break;
                     case 5:
+                        card.setBackgroundResource(R.drawable.clubs_5);
+                        break;
                     case 6:
+                        card.setBackgroundResource(R.drawable.clubs_6);
+                        break;
                     case 7:
+                        card.setBackgroundResource(R.drawable.clubs_7);
+                        break;
                     case 8:
+                        card.setBackgroundResource(R.drawable.clubs_8);
+                        break;
                     case 9:
+                        card.setBackgroundResource(R.drawable.clubs_9);
+                        break;
                     case 10:
+                        card.setBackgroundResource(R.drawable.clubs_10);
+                        break;
                     case 11:
+                        card.setBackgroundResource(R.drawable.clubs_j);
+                        break;
                     case 12:
+                        card.setBackgroundResource(R.drawable.clubs_q);
+                        break;
                     case 13:
-                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        card.setBackgroundResource(R.drawable.clubs_k);
                         break;
                 }
                 break;
             case 3:
                 switch (value) {
                     case 1:
+                        card.setBackgroundResource(R.drawable.diamonds_a);
+                        break;
                     case 2:
+                        card.setBackgroundResource(R.drawable.diamonds_2);
+                        break;
                     case 3:
+                        card.setBackgroundResource(R.drawable.diamonds_3);
+                        break;
                     case 4:
+                        card.setBackgroundResource(R.drawable.diamonds_4);
+                        break;
                     case 5:
+                        card.setBackgroundResource(R.drawable.diamonds_5);
+                        break;
                     case 6:
+                        card.setBackgroundResource(R.drawable.diamonds_6);
+                        break;
                     case 7:
+                        card.setBackgroundResource(R.drawable.diamonds_7);
+                        break;
                     case 8:
+                        card.setBackgroundResource(R.drawable.diamonds_8);
+                        break;
                     case 9:
+                        card.setBackgroundResource(R.drawable.diamonds_9);
+                        break;
                     case 10:
+                        card.setBackgroundResource(R.drawable.diamonds_10);
+                        break;
                     case 11:
+                        card.setBackgroundResource(R.drawable.diamonds_j);
+                        break;
                     case 12:
+                        card.setBackgroundResource(R.drawable.diamonds_q);
+                        break;
                     case 13:
-                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        card.setBackgroundResource(R.drawable.diamonds_k);
                         break;
                 }
                 break;
             case 4:
                 switch (value) {
                     case 1:
+                        card.setBackgroundResource(R.drawable.hearts_a);
+                        break;
                     case 2:
+                        card.setBackgroundResource(R.drawable.hearts_2);
+                        break;
                     case 3:
+                        card.setBackgroundResource(R.drawable.hearts_3);
+                        break;
                     case 4:
+                        card.setBackgroundResource(R.drawable.hearts_4);
+                        break;
                     case 5:
+                        card.setBackgroundResource(R.drawable.hearts_5);
+                        break;
                     case 6:
+                        card.setBackgroundResource(R.drawable.hearts_6);
+                        break;
                     case 7:
+                        card.setBackgroundResource(R.drawable.hearts_7);
+                        break;
                     case 8:
+                        card.setBackgroundResource(R.drawable.hearts_8);
+                        break;
                     case 9:
+                        card.setBackgroundResource(R.drawable.hearts_9);
+                        break;
                     case 10:
+                        card.setBackgroundResource(R.drawable.hearts_10);
+                        break;
                     case 11:
+                        card.setBackgroundResource(R.drawable.hearts_j);
+                        break;
                     case 12:
+                        card.setBackgroundResource(R.drawable.hearts_q);
+                        break;
                     case 13:
-                        card.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                        card.setBackgroundResource(R.drawable.hearts_k);
                         break;
                 }
                 break;
         }
+
     }
 }
