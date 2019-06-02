@@ -6,6 +6,7 @@ import android.support.annotation.DrawableRes;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.*;
 import java.util.*;
@@ -21,6 +22,8 @@ public class Game extends AppCompatActivity {
     LinearLayout viewHand; //holds player's cards
     LinearLayout DiscardPilePage;
 
+    GridLayout HouseLayoutGameScreen; //holds the top cards of the players' houses
+
     ImageButton AI1DiscardView;
     ImageButton playerDiscardView;
     ImageButton AI2DiscardView;
@@ -30,6 +33,8 @@ public class Game extends AppCompatActivity {
     ArrayList<Card> playerDiscard; //player's discard pile - AI 1 takes from this
     ArrayList<Card> AI1Discard; //AI 1's discard- AI 2 takes from this
     ArrayList<Card> AI2Discard; //AI 2's discard - Player takes from this
+
+    ArrayList<House> houses;
 
     //arrays to hold AIs' hands
     ArrayList<Card> AI1Hand;
@@ -56,6 +61,7 @@ public class Game extends AppCompatActivity {
         mainDeckView.setImageResource(R.drawable.back);
         viewHand = findViewById(R.id.playerHand);
         viewHand.getLayoutParams().width = 100;
+        HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
 
         DiscardPilePage = findViewById(R.id.AI1DiscardPilePage); //this line matters! links to the name of the linear layout in the XML file
 
@@ -91,6 +97,7 @@ public class Game extends AppCompatActivity {
 
         // update player hand view
         updateHand();
+        updateHouses();
 
         //button to allow player to draw card from main deck
         mainDeckView.setOnClickListener(new View.OnClickListener() {
@@ -241,6 +248,21 @@ public class Game extends AppCompatActivity {
 
         }
     }
+    void updateHouses(){
+        HouseLayoutGameScreen.removeAllViews();
+        for (int i = 0; i < houses.size(); i++){
+            ImageButton card = new ImageButton(this);
+            setNewCardImage(houses.get(i).returnTopCard().getSuit(),houses.get(i).returnTopCard().getValue(),card);
+            card.setAdjustViewBounds(true);
+            card.setLayoutParams(new LinearLayout.LayoutParams(258,400));
+            HouseLayoutGameScreen.addView(card);
+
+            View space = new Space (this);
+            space.setLayoutParams(new LinearLayout.LayoutParams(100,100));
+            HouseLayoutGameScreen.addView(space);
+        }
+    }
+
     void updateDiscardPile(int ai) { //1 = ai1, 2 = ai2, 3 = player
         DiscardPilePage.removeAllViews();
         if (ai == 1) {

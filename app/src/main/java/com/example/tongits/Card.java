@@ -2,7 +2,7 @@ package com.example.tongits;
 
 import java.security.acl.AclEntry;
 
-public class Card {
+public class Card implements Comparable<Card>{
 
     // CONSTRUCTOR
     public Card(int suit, int value)
@@ -23,6 +23,12 @@ public class Card {
         this.value = value;
     }
 
+    public int compareTo(Card other){
+        Integer s = suit;
+        Integer s1 = other.suit;
+        return s.compareTo(s1);
+    }
+
     public int compareCard(Card other){
         if (this.value < other.value)
             return -1;
@@ -31,6 +37,8 @@ public class Card {
         else
             return 0;
     }
+
+
 
     public int getSuit()
     {
