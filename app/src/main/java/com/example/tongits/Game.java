@@ -94,17 +94,17 @@ public class Game extends AppCompatActivity {
 
         //button to allow player to draw card from main deck
         mainDeckView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                 if (playerDrawTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
-                        playerHand.add(deckOfCards.topCard());
-                        deckOfCards.removeCard();
-                        updateHand();
-                        playerDrawTurn = false;
-                        AITurn(deckOfCards);
-                    }
+            @Override
+            public void onClick(View v) {
+             if (playerDrawTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
+                    playerHand.add(deckOfCards.topCard());
+                    deckOfCards.removeCard();
+                    updateHand();
+                    playerDrawTurn = false;
+                    AITurn(deckOfCards);
                 }
-            });
+            }
+        });
 
 
 
@@ -167,7 +167,16 @@ public class Game extends AppCompatActivity {
             }
         });
 
-
+        /*
+        viewHand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = viewHand.indexOfChild(v);
+                playerDiscard.add(playerHand.remove(index));
+                updateDiscardPile(3);
+                updateHand();
+            }
+        });*/
     }
 
 
@@ -229,16 +238,26 @@ public class Game extends AppCompatActivity {
     void updateHand(){
         viewHand.removeAllViews();
         for (int i = 0; i < playerHand.size(); i++) {
-            ImageButton card = new ImageButton(this);
+            final ImageButton card = new ImageButton(this);
             setNewCardImage(playerHand.get(i).getSuit(), playerHand.get(i).getValue(), card);
             card.setAdjustViewBounds(true);
             card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
             viewHand.addView(card);
+            card.setId(i);
 
             View space = new Space(this);
             space.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
             viewHand.addView(space);
 
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int index = viewHand.indexOfChild(card);
+                    playerDiscard.add(playerHand.remove(index/2));
+                    updateDiscardPile(3);
+                    updateHand();
+                }
+            });
         }
     }
     void updateDiscardPile(int ai) { //1 = ai1, 2 = ai2, 3 = player
