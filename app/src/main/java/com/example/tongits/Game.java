@@ -167,16 +167,6 @@ public class Game extends AppCompatActivity {
             }
         });
 
-        /*
-        viewHand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int index = viewHand.indexOfChild(v);
-                playerDiscard.add(playerHand.remove(index));
-                updateDiscardPile(3);
-                updateHand();
-            }
-        });*/
     }
 
 
