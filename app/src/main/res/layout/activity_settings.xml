@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settings"
+    android:background="#E5E5E5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#E5E5E5">
+
+        <TextView
+            android:id="@+id/settingsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="SETTINGS"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#F4D78A"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            app:fontFamily="@font/roboto" />
+
+        <Switch
+            android:id="@+id/musicSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Music"
+            android:textColor="#494949"
+            android:textSize="25dp"
+            android:background="#FFFFFF"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            app:fontFamily="@font/roboto"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

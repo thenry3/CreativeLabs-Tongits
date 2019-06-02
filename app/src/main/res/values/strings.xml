@@ -4,4 +4,8 @@
     <string name="button_send">Play</string>
     <string name="button_send2">Settings</string>
     <string name="title_activity_display_message">SettingsActivate</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
