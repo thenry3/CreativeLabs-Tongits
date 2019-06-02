@@ -43,8 +43,8 @@
 
     <ImageView
         android:id="@+id/cardDeck"
-        android:layout_width="121dp"
-        android:layout_height="140dp"
+        android:layout_width="78dp"
+        android:layout_height="121dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
