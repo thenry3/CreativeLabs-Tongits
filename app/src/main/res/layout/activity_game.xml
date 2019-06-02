@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".Game">
 
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="396dp"
+        android:layout_height="133dp"
+        android:fadeScrollbars="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:scrollbars="none"
+        android:splitMotionEvents="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.973">
+
+        <LinearLayout
+            android:id="@+id/playerHand"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
     <TextView
         android:id="@+id/AI1Label"
         android:layout_width="93dp"
@@ -55,6 +78,7 @@
     <HorizontalScrollView
         android:layout_width="396dp"
         android:layout_height="133dp"
+        android:layout_marginTop="8dp"
         android:fadeScrollbars="true"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:scrollbarAlwaysDrawVerticalTrack="false"
@@ -64,15 +88,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973">
+        app:layout_constraintTop_toTopOf="@+id/AI1DiscardPile"
+        app:layout_constraintVertical_bias="0.547">
 
         <LinearLayout
-            android:id="@+id/playerHand"
+            android:id="@+id/AI1DiscardPilePage"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal" />
     </HorizontalScrollView>
+
 
     <ImageButton
         android:id="@+id/AI2DiscardPile"
