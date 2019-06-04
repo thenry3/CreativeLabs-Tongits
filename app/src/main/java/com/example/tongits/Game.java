@@ -176,6 +176,13 @@ public class Game extends AppCompatActivity {
                 }
                 else
                     DiscardPilePage.setVisibility(View.VISIBLE);
+
+                playertracker++;
+                tracker1=tracker2=0;
+                if (playertracker>=2) { //this line jank asf
+                    DiscardPilePage.setVisibility(View.GONE);
+                    playertracker = 0;
+                }
             }
         });
 
