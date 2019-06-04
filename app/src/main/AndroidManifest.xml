@@ -9,13 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".settings"></activity>
-        <activity android:name=".AI1DiscardPilePage" />
-        <activity
-            android:name=".DisplayMessageActivity"
-            android:label="@string/title_activity_display_message"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Game" />
+        <activity android:name=".settings"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".credits"
+            android:parentActivityName=".settings">
+        </activity>
+        <activity android:name=".name"
+            android:parentActivityName=".settings">
+        </activity>
+        <activity android:name=".Game"
+            android:parentActivityName=".MainActivity">
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

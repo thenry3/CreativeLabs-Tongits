@@ -27,4 +27,32 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <style name="SettingsText">
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:background">#80FFFFFF</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">#494949</item>
+    </style>
+
+    <style name="HeaderText">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">#F4D78A</item>
+        <item name="android:paddingBottom">13dp</item>
+        <item name="android:paddingTop">13dp</item>
+    </style>
+
+    <style name="CreditsText">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">#494949</item>
+        <item name="android:paddingBottom">13dp</item>
+        <item name="android:paddingTop">13dp</item>
+    </style>
+
 </resources>
