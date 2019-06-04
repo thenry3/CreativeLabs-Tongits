@@ -9,6 +9,8 @@ import android.widget.*;
 import android.util.*;
 import java.util.*;
 import android.graphics.*;
+import android.graphics.drawable.*;
+import android.support.v4.graphics.drawable.*;
 
 
 public class Game extends AppCompatActivity {
@@ -264,11 +266,14 @@ public class Game extends AppCompatActivity {
                     // if selecting cards for a house
                     if (selectMode)
                     {
-                        if (SelectedCards.contains(playerHand.get(index/2)))
-                            SelectedCards.remove(playerHand.get(index/2));
+                        if (SelectedCards.contains(playerHand.get(index/2))) {
+                            card.getBackground().setColorFilter(Color.argb(0, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
+                            SelectedCards.remove(playerHand.get(index / 2));
+                        }
+
                         else {
                             SelectedCards.add(playerHand.get(index/2));
-                            card.setColorFilter(Color.argb(255, 94, 94, 94));
+                            card.getBackground().setColorFilter(Color.argb(150, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
                         }
 
                         // if nothing is selected, turn off selectMode
@@ -292,12 +297,19 @@ public class Game extends AppCompatActivity {
             card.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (selectMode)
+                    if (playerDrawTurn)
+                        return true;
+                    if (selectMode) {
+                        for (int i = 0; i < viewHand.getChildCount(); i += 2)
+                        {
+                            viewHand.getChildAt(i).getBackground().setColorFilter(Color.argb(0, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
+                        }
                         SelectedCards.clear();
+                    }
                     selectMode = true;
                     int index = viewHand.indexOfChild(card);
                     SelectedCards.add(playerHand.get(index/2));
-                    card.getDrawable().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+                    card.getBackground().setColorFilter(Color.argb(150, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
                     Log.d("df", "sdfs");
                     return true;
                 }
