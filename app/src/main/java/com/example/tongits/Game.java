@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.*;
 import android.util.*;
 import java.util.*;
+import android.graphics.*;
 
 
 public class Game extends AppCompatActivity {
@@ -47,6 +48,9 @@ public class Game extends AppCompatActivity {
     static int tracker1 = 0; //trying to see if the same button is pressed twice
     static int tracker2 = 0;
     static int playertracker = 0;
+
+    ArrayList<Card> SelectedCards;
+    boolean selectMode = false;
 
 
 
@@ -93,6 +97,7 @@ public class Game extends AppCompatActivity {
         AI1Discard = new ArrayList<>();
         AI2Discard = new ArrayList<>();
         playerDiscard = new ArrayList<>();
+        SelectedCards = new ArrayList<>();
 
         // update player hand view
         updateHand();
@@ -238,6 +243,7 @@ public class Game extends AppCompatActivity {
             final ImageButton card = new ImageButton(this);
             final int suit = playerHand.get(i).getSuit();
             final int value = playerHand.get(i).getValue();
+            final int curr = i;
             setNewCardImage(playerHand.get(i).getSuit(), playerHand.get(i).getValue(), card);
             card.setAdjustViewBounds(true);
             card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
@@ -251,10 +257,30 @@ public class Game extends AppCompatActivity {
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //makes sure you draw first
                     if (playerDrawTurn)
                         return;
-                    playerTurn = false;
                     int index = viewHand.indexOfChild(card);
+                    // if selecting cards for a house
+                    if (selectMode)
+                    {
+                        if (SelectedCards.contains(playerHand.get(index/2)))
+                            SelectedCards.remove(playerHand.get(index/2));
+                        else {
+                            SelectedCards.add(playerHand.get(index/2));
+                            card.setColorFilter(Color.argb(255, 94, 94, 94));
+                        }
+
+                        // if nothing is selected, turn off selectMode
+                        if (SelectedCards.isEmpty())
+                            selectMode = false;
+
+                        return;
+
+                    }
+                    // if not selecting, add card to player's discard
+                    playerTurn = false;
+
                     playerDiscard.add(playerHand.remove(index/2));
                     updateDiscardPile(3);
                     AITurn(deckOfCards);
@@ -266,6 +292,12 @@ public class Game extends AppCompatActivity {
             card.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    if (selectMode)
+                        SelectedCards.clear();
+                    selectMode = true;
+                    int index = viewHand.indexOfChild(card);
+                    SelectedCards.add(playerHand.get(index/2));
+                    card.getDrawable().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
                     Log.d("df", "sdfs");
                     return true;
                 }
