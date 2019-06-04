@@ -47,6 +47,7 @@ public class Game extends AppCompatActivity {
     static boolean activeAI1 = false; //is the AI1DiscardPilePage Linear Layout open or not?
     static boolean activeAI2 = false; //same for AI2
     static boolean activePlayer = false; //same, but for player
+    static boolean activeDiscard = false;
     static int tracker1 = 0; //trying to see if the same button is pressed twice
     static int tracker2 = 0;
     static int playertracker = 0;
@@ -124,21 +125,27 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateDiscardPile(1);
-                activeAI1 = !activeAI1;
 
-                if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
-                    DiscardPilePage.setVisibility(View.GONE);
-                    tracker1=tracker2=playertracker=0;
-                }
-                else{
+                if (activeDiscard)
                     DiscardPilePage.setVisibility(View.VISIBLE);
-
-                tracker1++;
-                tracker2=playertracker=0;
-                if (tracker1>=2) { //this line jank asf
+                else
                     DiscardPilePage.setVisibility(View.GONE);
-                    tracker1 =0;
-                }}
+
+//                activeAI1 = !activeAI1;
+//
+//                if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
+//                    DiscardPilePage.setVisibility(View.GONE);
+//                    tracker1=tracker2=playertracker=0;
+//                }
+//                else{
+//                    DiscardPilePage.setVisibility(View.VISIBLE);
+//
+//                tracker1++;
+//                tracker2=playertracker=0;
+//                if (tracker1>=2) { //this line jank asf
+//                    DiscardPilePage.setVisibility(View.GONE);
+//                    tracker1 =0;
+//                }}
             }
         });
 
@@ -147,21 +154,21 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateDiscardPile(2);
-                activeAI2 = !activeAI2;
-
-                if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
-                    DiscardPilePage.setVisibility(View.GONE);
-                    tracker1=tracker2=playertracker=0;
-                }
-                else{
-                    DiscardPilePage.setVisibility(View.VISIBLE);
-
-                tracker2++;
-                tracker1=playertracker=0;
-                if (tracker2>=2) { //this line jank asf
-                    DiscardPilePage.setVisibility(View.GONE);
-                    tracker2 =0;
-                }}
+//                activeAI2 = !activeAI2;
+//
+//                if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
+//                    DiscardPilePage.setVisibility(View.GONE);
+//                    tracker1=tracker2=playertracker=0;
+//                }
+//                else{
+//                    DiscardPilePage.setVisibility(View.VISIBLE);
+//
+//                tracker2++;
+//                tracker1=playertracker=0;
+//                if (tracker2>=2) { //this line jank asf
+//                    DiscardPilePage.setVisibility(View.GONE);
+//                    tracker2 =0;
+//                }}
             }
         });
 
@@ -169,20 +176,20 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateDiscardPile(3);
-                activePlayer = !activePlayer;
-                if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
-                    DiscardPilePage.setVisibility(View.GONE);
-                    tracker1=tracker2=playertracker=0;
-                }
-                else
-                    DiscardPilePage.setVisibility(View.VISIBLE);
-
-                playertracker++;
-                tracker1=tracker2=0;
-                if (playertracker>=2) { //this line jank asf
-                    DiscardPilePage.setVisibility(View.GONE);
-                    playertracker = 0;
-                }
+//                activePlayer = !activePlayer;
+//                if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
+//                    DiscardPilePage.setVisibility(View.GONE);
+//                    tracker1=tracker2=playertracker=0;
+//                }
+//                else
+//                    DiscardPilePage.setVisibility(View.VISIBLE);
+//
+//                playertracker++;
+//                tracker1=tracker2=0;
+//                if (playertracker>=2) { //this line jank asf
+//                    DiscardPilePage.setVisibility(View.GONE);
+//                    playertracker = 0;
+//                }
             }
         });
 

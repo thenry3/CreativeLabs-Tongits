@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E5E5E5"
     tools:context=".Game">
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
-        android:layout_width="396dp"
-        android:layout_height="133dp"
+        android:layout_width="fill_parent"
+        android:layout_height="147dp"
+        android:background="#C9D8A7"
         android:fadeScrollbars="true"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:scrollbarAlwaysDrawVerticalTrack="false"
@@ -17,15 +19,16 @@
         android:splitMotionEvents="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973">
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:id="@+id/playerHand"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="147dp"
+            android:gravity="center"
             android:orientation="horizontal" />
     </HorizontalScrollView>
 
