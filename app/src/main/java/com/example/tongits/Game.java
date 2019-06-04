@@ -61,7 +61,7 @@ public class Game extends AppCompatActivity {
         mainDeckView.setImageResource(R.drawable.back);
         viewHand = findViewById(R.id.playerHand);
         viewHand.getLayoutParams().width = 100;
-        HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
+        //HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
 
         DiscardPilePage = findViewById(R.id.AI1DiscardPilePage); //this line matters! links to the name of the linear layout in the XML file
 
@@ -97,7 +97,7 @@ public class Game extends AppCompatActivity {
 
         // update player hand view
         updateHand();
-        updateHouses();
+        //updateHouses();
 
         //button to allow player to draw card from main deck
         mainDeckView.setOnClickListener(new View.OnClickListener() {
