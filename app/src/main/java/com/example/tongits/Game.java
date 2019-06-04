@@ -1,14 +1,12 @@
 package com.example.tongits;
 
 
-import android.content.Context;
-import android.support.annotation.DrawableRes;
-import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.*;
+import android.util.*;
 import java.util.*;
 
 
@@ -17,6 +15,7 @@ public class Game extends AppCompatActivity {
     // GLOBAL VARIABLES
 
     boolean gameFinished = false; // keeps track of when game ends
+    final Deck deckOfCards = new Deck();
 
     ImageView mainDeckView; //the icon for the main deck
     LinearLayout viewHand; //holds player's cards
@@ -39,7 +38,8 @@ public class Game extends AppCompatActivity {
     //arrays to hold AIs' hands
     ArrayList<Card> AI1Hand;
     ArrayList<Card> AI2Hand;
-    boolean playerDrawTurn = true; //keeps track of player's turn
+    boolean playerDrawTurn = false; //keeps track of player's turn
+    boolean playerTurn = true;
 
     static boolean activeAI1 = false; //is the AI1DiscardPilePage Linear Layout open or not?
     static boolean activeAI2 = false; //same for AI2
@@ -47,6 +47,8 @@ public class Game extends AppCompatActivity {
     static int tracker1 = 0; //trying to see if the same button is pressed twice
     static int tracker2 = 0;
     static int playertracker = 0;
+
+
 
     /*------------------------------------------------------------------*/
 
@@ -63,7 +65,7 @@ public class Game extends AppCompatActivity {
         viewHand.getLayoutParams().width = 100;
         //HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
 
-        DiscardPilePage = findViewById(R.id.AI1DiscardPilePage); //this line matters! links to the name of the linear layout in the XML file
+        DiscardPilePage = findViewById(R.id.DiscardPilePage); //this line matters! links to the name of the linear layout in the XML file
 
 
         AI1DiscardView = findViewById(R.id.AI1DiscardPile);
@@ -71,9 +73,6 @@ public class Game extends AppCompatActivity {
         playerDiscardView = findViewById(R.id.playerDiscardPile);
 
         //AI1DiscardView.getLayoutParams().width = 100; this line is unnecessary? idk what it does
-
-
-        final Deck deckOfCards = new Deck();
 
         //shuffle a few times for good measure
         for (int i = 0; i < 20; i++){
@@ -103,12 +102,11 @@ public class Game extends AppCompatActivity {
         mainDeckView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             if (playerDrawTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
+             if (playerDrawTurn && playerTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
                     playerHand.add(deckOfCards.topCard());
                     deckOfCards.removeCard();
                     updateHand();
                     playerDrawTurn = false;
-                    AITurn(deckOfCards);
                 }
             }
         });
@@ -199,8 +197,9 @@ public class Game extends AppCompatActivity {
 
     // Have AIs' take a card from main deck and discard their highest valued card
     void AITurn(Deck deck){
-        if (playerDrawTurn || deck.getNumberOfCardsInDeck() < 1)
+        if (playerDrawTurn || playerTurn || deck.getNumberOfCardsInDeck() < 1) {
             return;
+        }
         // AI 1 draw card and discard
         AI1Hand.add(deck.topCard());
         deck.removeCard();
@@ -227,6 +226,7 @@ public class Game extends AppCompatActivity {
         setNewCardImage(AI2Discard.get(AI2Discard.size() - 1).getSuit(), AI2Discard.get(AI2Discard.size() - 1).getValue(), AI2DiscardView);
 
         playerDrawTurn = true; //end AIs' turns
+        playerTurn = true;
 
         return;
     }
@@ -236,6 +236,8 @@ public class Game extends AppCompatActivity {
         viewHand.removeAllViews();
         for (int i = 0; i < playerHand.size(); i++) {
             final ImageButton card = new ImageButton(this);
+            final int suit = playerHand.get(i).getSuit();
+            final int value = playerHand.get(i).getValue();
             setNewCardImage(playerHand.get(i).getSuit(), playerHand.get(i).getValue(), card);
             card.setAdjustViewBounds(true);
             card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
@@ -249,10 +251,23 @@ public class Game extends AppCompatActivity {
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (playerDrawTurn)
+                        return;
+                    playerTurn = false;
                     int index = viewHand.indexOfChild(card);
                     playerDiscard.add(playerHand.remove(index/2));
                     updateDiscardPile(3);
+                    AITurn(deckOfCards);
                     updateHand();
+                    setNewCardImage(suit, value, playerDiscardView);
+                }
+            });
+
+            card.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Log.d("df", "sdfs");
+                    return true;
                 }
             });
         }

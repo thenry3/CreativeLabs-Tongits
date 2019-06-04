@@ -94,10 +94,11 @@
         app:layout_constraintVertical_bias="0.547">
 
         <LinearLayout
-            android:id="@+id/AI1DiscardPilePage"
+            android:id="@+id/DiscardPilePage"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            android:visibility="gone" />
     </HorizontalScrollView>
 
 
@@ -129,17 +130,37 @@
         android:id="@+id/HouseGrid"
         android:layout_width="395dp"
         android:layout_height="186dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AI1DiscardPile">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.33">
 
     </android.support.v7.widget.GridLayout>
+
+    <ImageView
+        android:id="@+id/AI1Back"
+        android:layout_width="78dp"
+        android:layout_height="121dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085"
+        app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/AI2Back"
+        android:layout_width="78dp"
+        android:layout_height="121dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085"
+        app:srcCompat="@drawable/back" />
 
 </android.support.constraint.ConstraintLayout>
