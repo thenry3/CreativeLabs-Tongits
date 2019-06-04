@@ -41,13 +41,13 @@ public class settings extends AppCompatActivity {
         finish();
     }
 
-    public void onClickCredits (View view){
-        Intent CreditsIntent = new Intent(this, credits.class);
-        startActivity(CreditsIntent);
-    }
-
     public void onClickName (View view){
         Intent NameIntent = new Intent(this, name.class);
         startActivity(NameIntent);
+    }
+
+    public void onClickCredits (View view){
+        Intent CreditsIntent = new Intent(this, credits.class);
+        startActivity(CreditsIntent);
     }
 }

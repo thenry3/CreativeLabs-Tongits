@@ -9,11 +9,10 @@
     android:background="#E5E5E5">
 
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#E5E5E5">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/creditsTitle"
@@ -26,42 +25,66 @@
             app:fontFamily="@font/roboto" />
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/creditBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.212"
+                app:srcCompat="@drawable/creditsbg" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/TeamPhoto"
-                android:layout_width="192dp"
-                android:layout_height="230dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="50dp"
+                android:layout_width="205dp"
+                android:layout_height="237dp"
                 android:rotation="-10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintVertical_bias="0.214"
                 app:srcCompat="@drawable/teamphoto" />
         </android.support.constraint.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/names"
-            style="@style/CreditsText"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:lineSpacingExtra="22dp"
-            android:text=" ashley phuong // project lead \n henry trinh // project lead \n ashwin ranade // developer \n nila elumalai // developer \n ashley huynh // illustrator \n louis dewitt-hoeger // ux designer "
-            app:fontFamily="@font/centuryschoolbook" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/names"
+                style="@style/CreditsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="22dp"
+                android:text=" ashley phuong // project lead \n henry trinh // project lead \n ashwin ranade // developer \n nila elumalai // developer \n ashley huynh // illustrator \n louis dewitt-hoeger // ux designer "
+                app:fontFamily="@font/centuryschoolbook"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.838" />
+
+        </android.support.constraint.ConstraintLayout>
 
 
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </android.support.constraint.ConstraintLayout>
