@@ -580,6 +580,24 @@ public class Game extends AppCompatActivity {
         }
     }
 
+    public boolean canDrawFromDiscard(ArrayList<Card> hand,Card discardedCard){ //checks if any valid combo works
+        if (hand.size() < 2) return false; //need at least 2 cards in hand
+        ArrayList<Card> threecard = new ArrayList<>(); //2 from hand + discardedCard
+        for (int i = 0; i < hand.size(); i++){
+            for (int j = 0; j < hand.size(); j++){
+                if (j!=i){
+                    threecard.add(hand.get(i));
+                    threecard.add(hand.get(j));
+                    threecard.add(discardedCard);
+                    if (isValidHouse(threecard))
+                        return true;
+                    threecard.clear(); //empties threecard if not true
+                }
+            }
+        }
+        return false;
+    }
+
     // checks if a group of cards is a valid house
     public boolean isValidHouse(ArrayList<Card> card_list)
     {
