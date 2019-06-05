@@ -329,6 +329,9 @@ public class Game extends AppCompatActivity {
                                 houses.add(new House(temp));
                                 for (int l = 0; l < temp.size(); l++)
                                     AI1Hand.remove(temp.get(l));
+                                i = 0;
+                                j = 0;
+                                k = 0;
                                 temp.clear();
                                 updateHouses();
                             }
@@ -347,6 +350,8 @@ public class Game extends AppCompatActivity {
                 if (houses.get(j).addCard(AI1Hand.get(i)))
                 {
                     AI1Hand.remove(i);
+                    i = 0;
+                    j = 0;
                     updateHouses();
                 }
             }
@@ -391,6 +396,9 @@ public class Game extends AppCompatActivity {
                                 houses.add(new House(temp));
                                 for (int l = 0; l < temp.size(); l++)
                                     AI2Hand.remove(temp.get(l));
+                                i = 0;
+                                j = 0;
+                                k = 0;
                                 temp.clear();
                                 updateHouses();
                             }
@@ -409,6 +417,8 @@ public class Game extends AppCompatActivity {
                 if (houses.get(j).addCard(AI2Hand.get(i)))
                 {
                     AI2Hand.remove(i);
+                    i = 0;
+                    j = 0;
                     updateHouses();
                 }
             }
@@ -888,6 +898,9 @@ public class Game extends AppCompatActivity {
                                 houses.add(new House(temp));
                                 for (int l = 0; l < temp.size(); l++)
                                     AI2Hand.remove(temp.get(l));
+                                i = 0;
+                                j = 0;
+                                k = 0;
                                 temp.clear();
                                 updateHouses();
                             }
@@ -913,6 +926,9 @@ public class Game extends AppCompatActivity {
                                 houses.add(new House(temp));
                                 for (int l = 0; l < temp.size(); l++)
                                     AI1Hand.remove(temp.get(l));
+                                i = 0;
+                                j = 0;
+                                k = 0;
                                 temp.clear();
                                 updateHouses();
                             }
@@ -938,6 +954,9 @@ public class Game extends AppCompatActivity {
                                 houses.add(new House(temp));
                                 for (int l = 0; l < temp.size(); l++)
                                     playerHand.remove(temp.get(l));
+                                i = 0;
+                                j = 0;
+                                k = 0;
                                 temp.clear();
                                 updateHouses();
                             }
