@@ -58,6 +58,8 @@ public class Game extends AppCompatActivity {
     ArrayList<Card> SelectedCards;
     boolean selectMode = false;
 
+    boolean addMode = false;
+
 
 
     /*------------------------------------------------------------------*/
@@ -231,6 +233,13 @@ public class Game extends AppCompatActivity {
                 updateHand();
                 updateHouses();
 
+            }
+        });
+
+        addHouseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addMode = true;
             }
         });
 
