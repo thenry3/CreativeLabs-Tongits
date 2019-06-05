@@ -1,15 +1,16 @@
 package com.example.tongits;
 
 
-import android.content.Context;
-import android.support.annotation.DrawableRes;
-import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.*;
+import android.util.*;
 import java.util.*;
+import android.graphics.*;
+import android.graphics.drawable.*;
+import android.support.v4.graphics.drawable.*;
 
 
 public class Game extends AppCompatActivity {
@@ -17,13 +18,14 @@ public class Game extends AppCompatActivity {
     // GLOBAL VARIABLES
 
     boolean gameFinished = false; // keeps track of when game ends
+    final Deck deckOfCards = new Deck();
 
     ImageView mainDeckView; //the icon for the main deck
     LinearLayout viewHand; //holds player's cards
     LinearLayout DiscardPile;
     ConstraintLayout DiscardPilePage;
 
-    GridLayout HouseLayoutGameScreen; //holds the top cards of the players' houses
+    android.support.v7.widget.GridLayout HouseLayoutGameScreen; //holds the top cards of the players' houses
 
     ImageButton AI1DiscardView;
     ImageButton AI2DiscardView;
@@ -35,12 +37,13 @@ public class Game extends AppCompatActivity {
     ArrayList<Card> AI1Discard; //AI 1's discard- AI 2 takes from this
     ArrayList<Card> AI2Discard; //AI 2's discard - Player takes from this
 
-    ArrayList<House> houses;
+    ArrayList<House> houses=new ArrayList<>();
 
     //arrays to hold AIs' hands
     ArrayList<Card> AI1Hand;
     ArrayList<Card> AI2Hand;
-    boolean playerDrawTurn = true; //keeps track of player's turn
+    boolean playerDrawTurn = false; //keeps track of player's turn
+    boolean playerTurn = true;
 
     static boolean activeAI1 = false; //is the AI1DiscardPile Linear Layout open or not?
     static boolean activeAI2 = false; //same for AI2
@@ -49,6 +52,11 @@ public class Game extends AppCompatActivity {
     static int tracker2 = 0;
     static int playertracker = 0;
 
+    ArrayList<Card> SelectedCards;
+    boolean selectMode = false;
+
+
+
     /*------------------------------------------------------------------*/
 
 
@@ -56,25 +64,22 @@ public class Game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
         // initialize variables with Views
         mainDeckView = findViewById(R.id.cardDeck);
         mainDeckView.setImageResource(R.drawable.back);
         viewHand = findViewById(R.id.playerHand);
         viewHand.getLayoutParams().width = 100;
-        //HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
+
 
         DiscardPile = findViewById(R.id.discardPiles); //this line matters! links to the name of the linear layout in the XML file
         DiscardPilePage = findViewById(R.id.discardPilePage); //links to constraint layout that controls display of cards
+        
+      HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
 
         AI1DiscardView = findViewById(R.id.AI1DiscardPile);
         AI2DiscardView = findViewById(R.id.AI2DiscardPile);
         playerDiscardView = findViewById(R.id.playerDiscardPile);
 
-        //AI1DiscardView.getLayoutParams().width = 100; this line is unnecessary? idk what it does
-
-
-        final Deck deckOfCards = new Deck();
 
         //shuffle a few times for good measure
         for (int i = 0; i < 20; i++){
@@ -95,29 +100,46 @@ public class Game extends AppCompatActivity {
         AI1Discard = new ArrayList<>();
         AI2Discard = new ArrayList<>();
         playerDiscard = new ArrayList<>();
+        SelectedCards = new ArrayList<>();
 
         // update player hand view
         updateHand();
-        //updateHouses();
+
+        updateHouses(); //might interfere w/ update hand idk
 
         //button to allow player to draw card from main deck
         mainDeckView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             if (playerDrawTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
+             if (playerDrawTurn && playerTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
                     playerHand.add(deckOfCards.topCard());
                     deckOfCards.removeCard();
                     updateHand();
                     playerDrawTurn = false;
-                    AITurn(deckOfCards);
                 }
             }
         });
 
-        AI1DiscardView.setOnClickListener(new View.OnClickListener() { //this is for the first AI view
+        AI2DiscardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (playerDrawTurn && playerTurn && AI2Discard.size() > 0) {
+                    playerHand.add(deckOfCards.topCard());
+                    deckOfCards.removeCard();
+                    updateHand();
+                    playerDrawTurn = false;
+                }
+
+            }
+        });
+
+
+
+        AI1DiscardView.setOnLongClickListener(new View.OnLongClickListener() { //this is for the first AI view
+            @Override
+            public boolean onLongClick(View v) {
                 updateDiscardPile(1);
+
                 activeAI1 = !activeAI1;
 
                 if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
@@ -133,13 +155,14 @@ public class Game extends AppCompatActivity {
                     DiscardPilePage.setVisibility(View.GONE);
                     tracker1 =0;
                 }}
+                return true;
             }
         });
 
 
-        AI2DiscardView.setOnClickListener(new View.OnClickListener() { //this is for the first AI view
+        AI2DiscardView.setOnLongClickListener(new View.OnLongClickListener() { //this is for the first AI view
             @Override
-            public void onClick(View v) {
+            public boolean onLongClick(View v) {
                 updateDiscardPile(2);
                 activeAI2 = !activeAI2;
 
@@ -156,12 +179,14 @@ public class Game extends AppCompatActivity {
                     DiscardPilePage.setVisibility(View.GONE);
                     tracker2 =0;
                 }}
+
+                return true;
             }
         });
 
-        playerDiscardView.setOnClickListener(new View.OnClickListener() { //this is for the first AI view
+        playerDiscardView.setOnLongClickListener(new View.OnLongClickListener() { //this is for the first AI view
             @Override
-            public void onClick(View v) {
+            public boolean onLongClick(View v) {
                 updateDiscardPile(3);
                 activePlayer = !activePlayer;
                 if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
@@ -170,6 +195,15 @@ public class Game extends AppCompatActivity {
                 }
                 else
                     DiscardPilePage.setVisibility(View.VISIBLE);
+
+                playertracker++;
+                tracker1=tracker2=0;
+                if (playertracker>=2) { //this line jank asf
+                    DiscardPilePage.setVisibility(View.GONE);
+                    playertracker = 0;
+                }
+
+                return true;
             }
         });
 
@@ -201,8 +235,9 @@ public class Game extends AppCompatActivity {
 
     // Have AIs' take a card from main deck and discard their highest valued card
     void AITurn(Deck deck){
-        if (playerDrawTurn || deck.getNumberOfCardsInDeck() < 1)
+        if (playerDrawTurn || playerTurn || deck.getNumberOfCardsInDeck() < 1) {
             return;
+        }
         // AI 1 draw card and discard
         AI1Hand.add(deck.topCard());
         deck.removeCard();
@@ -210,15 +245,6 @@ public class Game extends AppCompatActivity {
         AI1Discard.add(AI1Hand.get(highcardindex));
         AI1Hand.remove(highcardindex);
         setNewCardImage(AI1Discard.get(AI1Discard.size() - 1).getSuit(), AI1Discard.get(AI1Discard.size() - 1).getValue(), AI1DiscardView);
-
-
-//        try {
-//            TimeUnit.SECONDS.sleep(2);
-//        }
-//        catch(InterruptedException ex)
-//        {
-//            Thread.currentThread().interrupt();
-//        }
 
         // AI 2 turn
         AI2Hand.add(deck.topCard());
@@ -229,6 +255,7 @@ public class Game extends AppCompatActivity {
         setNewCardImage(AI2Discard.get(AI2Discard.size() - 1).getSuit(), AI2Discard.get(AI2Discard.size() - 1).getValue(), AI2DiscardView);
 
         playerDrawTurn = true; //end AIs' turns
+        playerTurn = true;
 
         return;
     }
@@ -238,6 +265,9 @@ public class Game extends AppCompatActivity {
         viewHand.removeAllViews();
         for (int i = 0; i < playerHand.size(); i++) {
             final ImageButton card = new ImageButton(this);
+            final int suit = playerHand.get(i).getSuit();
+            final int value = playerHand.get(i).getValue();
+            final int curr = i;
             setNewCardImage(playerHand.get(i).getSuit(), playerHand.get(i).getValue(), card);
             card.setAdjustViewBounds(true);
             card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
@@ -251,18 +281,68 @@ public class Game extends AppCompatActivity {
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //makes sure you draw first
+                    if (playerDrawTurn)
+                        return;
                     int index = viewHand.indexOfChild(card);
+                    // if selecting cards for a house
+                    if (selectMode)
+                    {
+                        if (SelectedCards.contains(playerHand.get(index/2))) {
+                            card.getBackground().setColorFilter(Color.argb(0, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
+                            SelectedCards.remove(playerHand.get(index / 2));
+                        }
+
+                        else {
+                            SelectedCards.add(playerHand.get(index/2));
+                            card.getBackground().setColorFilter(Color.argb(150, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
+                        }
+
+                        // if nothing is selected, turn off selectMode
+                        if (SelectedCards.isEmpty())
+                            selectMode = false;
+
+                        return;
+
+                    }
+                    // if not selecting, add card to player's discard
+                    playerTurn = false;
+
                     playerDiscard.add(playerHand.remove(index/2));
                     updateDiscardPile(3);
+                    AITurn(deckOfCards);
                     updateHand();
                     setNewCardImage(playerDiscard.get(playerDiscard.size() - 1).getSuit(), playerDiscard.get(playerDiscard.size() - 1).getValue(), playerDiscardView);
+                }
+            });
+
+            card.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (playerDrawTurn)
+                        return true;
+                    if (selectMode) {
+                        for (int i = 0; i < viewHand.getChildCount(); i += 2)
+                        {
+                            viewHand.getChildAt(i).getBackground().setColorFilter(Color.argb(0, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
+                        }
+                        SelectedCards.clear();
+                    }
+                    selectMode = true;
+                    int index = viewHand.indexOfChild(card);
+                    SelectedCards.add(playerHand.get(index/2));
+                    card.getBackground().setColorFilter(Color.argb(150, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
+                    Log.d("df", "sdfs");
+                    return true;
                 }
             });
         }
     }
 
+    // update the house grid view
     void updateHouses(){
         HouseLayoutGameScreen.removeAllViews();
+
         for (int i = 0; i < houses.size(); i++){
             ImageButton card = new ImageButton(this);
             setNewCardImage(houses.get(i).returnTopCard().getSuit(),houses.get(i).returnTopCard().getValue(),card);
@@ -495,6 +575,42 @@ public class Game extends AppCompatActivity {
                 }
                 break;
         }
+    }
 
+    // checks if a group of cards is a valid house
+    public boolean isValidHouse(ArrayList<Card> card_list)
+    {
+        if (card_list.size() < 3)
+            return false;
+
+        //checking if all the same #
+        boolean isSameValue = true;
+        int initialValue = card_list.get(0).getValue();
+        for (int i = 1; i < card_list.size(); i++){
+            if(!(card_list.get(i).getValue()==initialValue)){
+                isSameValue = false;
+                break;
+            }
+        }
+
+        //checking if the same suit
+        boolean isSameSuit = true;
+        int initialSuit = card_list.get(0).getSuit();
+        for (int i = 1; i < card_list.size(); i++){
+            if (!(card_list.get(i).getSuit() == initialSuit)){
+                isSameSuit=false;
+                break;
+            }
+        }
+        //checking if consecutive #s
+        boolean isConsecutive = true;
+        for (int i = 0; i < card_list.size()-1; i++){
+            if (card_list.get(i+1).getValue() - card_list.get(i).getValue() !=1){
+                isConsecutive = false;
+                break;
+            }
+        }
+
+        return isSameValue || (isSameSuit && isConsecutive);
     }
 }
