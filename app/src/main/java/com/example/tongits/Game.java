@@ -298,13 +298,58 @@ public class Game extends AppCompatActivity {
             }
             return;
         }
-        // AI 1 draw card and discard
-        AI1Hand.add(deck.topCard());
-        deck.removeCard();
+        // AI 1 turn
+        // See if AI 1 can draw from player discard
+        if (canDrawFromDiscard(AI1Hand, playerDiscard.get(playerDiscard.size() - 1)))
+            AI1Hand.add(playerDiscard.remove(playerDiscard.size() - 1));
+        else //if can't pull from player pile
+        {
+            AI1Hand.add(deck.topCard());
+            deck.removeCard();
+        }
+
+        // check to see if any houses exist and place them
+        if (AI1Hand.size() >= 3)
+        {
+            ArrayList<Card> temp = new ArrayList<>();
+            for (int i = 0; i < AI1Hand.size(); i++) {
+                for (int j = 0; j < AI1Hand.size(); j++) {
+                    for (int k = 0; k < AI1Hand.size(); k++) {
+                        if (i != k && i != j && j != k) {
+                            temp.add(AI1Hand.get(i));
+                            temp.add(AI1Hand.get(k));
+                            temp.add(AI1Hand.get(j));
+                            if (isValidHouse(temp))
+                            {
+                                houses.add(new House(temp));
+                                for (int l = 0; l < temp.size(); l++)
+                                    AI1Hand.remove(temp.get(l));
+                                temp.clear();
+                                updateHouses();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // if able to add to a house, do so
+        for (int i = 0; i < AI1Hand.size(); i++)
+        {
+            for (int j = 0; j < houses.size(); j++)
+            {
+                if (houses.get(j).addCard(AI1Hand.get(i)))
+                {
+                    AI1Hand.remove(i);
+                    updateHouses();
+                }
+            }
+        }
+
         int highcardindex = findHighestCard(AI1Hand);
-        AI1Discard.add(AI1Hand.get(highcardindex));
-        AI1Hand.remove(highcardindex);
+        AI1Discard.add(AI1Hand.remove(highcardindex));
         setNewCardImage(AI1Discard.get(AI1Discard.size() - 1).getSuit(), AI1Discard.get(AI1Discard.size() - 1).getValue(), AI1DiscardView);
+
         if (deckOfCards.getNumberOfCardsInDeck() == 0)
             mainDeckView.setBackgroundResource(0);
         if (deckOfCards.getNumberOfCardsInDeck() == 0 || playerHand.size() == 0) {
@@ -312,12 +357,57 @@ public class Game extends AppCompatActivity {
         }
 
         // AI 2 turn
-        AI2Hand.add(deck.topCard());
-        deck.removeCard();
+        // See if AI 2 can draw from player discard
+        if (canDrawFromDiscard(AI2Hand, AI1Discard.get(AI1Discard.size() - 1)))
+            AI2Hand.add(AI1Discard.remove(AI1Discard.size() - 1));
+        else //if can't pull from player pile
+        {
+            AI2Hand.add(deck.topCard());
+            deck.removeCard();
+        }
+
+        // check to see if any houses exist and place them
+        if (AI2Hand.size() >= 3)
+        {
+            ArrayList<Card> temp = new ArrayList<>();
+            for (int i = 0; i < AI2Hand.size(); i++) {
+                for (int j = 0; j < AI2Hand.size(); j++) {
+                    for (int k = 0; k < AI2Hand.size(); k++) {
+                        if (i != k && i != j && j != k) {
+                            temp.add(AI2Hand.get(i));
+                            temp.add(AI2Hand.get(k));
+                            temp.add(AI2Hand.get(j));
+                            if (isValidHouse(temp))
+                            {
+                                houses.add(new House(temp));
+                                for (int l = 0; l < temp.size(); l++)
+                                    AI2Hand.remove(temp.get(l));
+                                temp.clear();
+                                updateHouses();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // if able to add to a house, do so
+        for (int i = 0; i < AI2Hand.size(); i++)
+        {
+            for (int j = 0; j < houses.size(); j++)
+            {
+                if (houses.get(j).addCard(AI2Hand.get(i)))
+                {
+                    AI2Hand.remove(i);
+                    updateHouses();
+                }
+            }
+        }
+
         highcardindex = findHighestCard(AI2Hand);
-        AI2Discard.add(AI2Hand.get(highcardindex));
-        AI2Hand.remove(highcardindex);
+        AI2Discard.add(AI2Hand.remove(highcardindex));
         setNewCardImage(AI2Discard.get(AI2Discard.size() - 1).getSuit(), AI2Discard.get(AI2Discard.size() - 1).getValue(), AI2DiscardView);
+
         if (deckOfCards.getNumberOfCardsInDeck() == 0)
             mainDeckView.setBackgroundResource(0);
         if (deckOfCards.getNumberOfCardsInDeck() == 0 || playerHand.size() == 0) {
