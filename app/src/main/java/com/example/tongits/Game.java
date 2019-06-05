@@ -293,9 +293,9 @@ public class Game extends AppCompatActivity {
     }
 
     // Have AIs' take a card from main deck and discard their highest valued card
-    void AITurn(Deck deck){
-        if (playerDrawTurn || playerTurn || deck.getNumberOfCardsInDeck() < 1) {
-            if (deck.getNumberOfCardsInDeck() < 1) {
+    void AITurn(){
+        if (playerDrawTurn || playerTurn || deckOfCards.getNumberOfCardsInDeck() < 1) {
+            if (deckOfCards.getNumberOfCardsInDeck() < 1) {
                 gameFinished = true;
             }
             return;
@@ -307,10 +307,10 @@ public class Game extends AppCompatActivity {
             if (playerDiscard.isEmpty())
                 playerDiscardView.setBackgroundResource(0);
         }
-        else //if can't pull from player pile
+        else if (deckOfCards.getNumberOfCardsInDeck() > 0)//if can't pull from player pile
         {
-            AI1Hand.add(deck.topCard());
-            deck.removeCard();
+            AI1Hand.add(deckOfCards.topCard());
+            deckOfCards.removeCard();
         }
 
         // check to see if any houses exist and place them
@@ -361,9 +361,9 @@ public class Game extends AppCompatActivity {
         AI1Discard.add(AI1Hand.remove(highcardindex));
         setNewCardImage(AI1Discard.get(AI1Discard.size() - 1).getSuit(), AI1Discard.get(AI1Discard.size() - 1).getValue(), AI1DiscardView);
 
-        if (deckOfCards.getNumberOfCardsInDeck() == 0)
+        if (deckOfCards.getNumberOfCardsInDeck() <= 0)
             mainDeckView.setBackgroundResource(0);
-        if (deckOfCards.getNumberOfCardsInDeck() == 0 || playerHand.size() == 0) {
+        if (deckOfCards.getNumberOfCardsInDeck() <= 0 || playerHand.size() == 0) {
             gameOver();
         }
 
@@ -374,10 +374,10 @@ public class Game extends AppCompatActivity {
             if (AI1Discard.isEmpty())
                 AI1DiscardView.setBackgroundResource(0);
         }
-        else //if can't pull from player pile
+        else if (deckOfCards.getNumberOfCardsInDeck() > 0)//if can't pull from player pile
         {
-            AI2Hand.add(deck.topCard());
-            deck.removeCard();
+            AI2Hand.add(deckOfCards.topCard());
+            deckOfCards.removeCard();
         }
 
         // check to see if any houses exist and place them
@@ -510,7 +510,7 @@ public class Game extends AppCompatActivity {
                         gameOver();
                     }
 
-                    AITurn(deckOfCards);
+                    AITurn();
                 }
             });
 
@@ -548,7 +548,7 @@ public class Game extends AppCompatActivity {
             setNewCardImage(houses.get(i).returnTopCard().getSuit(),houses.get(i).returnTopCard().getValue(),card);
             card.getBackground().setColorFilter(Color.argb(0, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
             card.setAdjustViewBounds(true);
-            card.setLayoutParams(new LinearLayout.LayoutParams(258,400));
+            card.setLayoutParams(new LinearLayout.LayoutParams(193,300));
             HouseLayoutGameScreen.addView(card);
 
             View space = new Space (this);
