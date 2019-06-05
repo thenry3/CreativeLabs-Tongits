@@ -8,6 +8,47 @@
     tools:context=".Game">
 
     //PAGE HEADER
+
+    <Button
+        android:id="@+id/makeHouseButton"
+        android:layout_width="115dp"
+        android:layout_height="45dp"
+        android:background="@drawable/play_button"
+        android:text="Set a House"
+        android:textColor="#FFFFFF"
+        android:textScaleX="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:visibility="gone"
+        app:fontFamily="@font/roboto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.759" />
+
+    <Button
+        android:id="@+id/addHouseButton"
+        android:layout_width="115dp"
+        android:layout_height="45dp"
+        android:background="@drawable/play_button"
+        android:text="Add to House"
+        android:textColor="#FFFFFF"
+        android:textScaleX="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:visibility="gone"
+        app:fontFamily="@font/roboto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.68" />
+
     <TextView
         android:id="@+id/gameTitle"
         style="@style/HeaderText"
@@ -16,15 +57,16 @@
         android:gravity="center"
         android:onClick="onGameReturn"
         android:text="T O N G I T S"
-        app:layout_constraintTop_toTopOf="parent"
-        app:fontFamily="@font/roboto" />
+        app:fontFamily="@font/roboto"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     //PLAYER HAND SCROLLING VIEW
+
     <HorizontalScrollView
         android:id="@+id/playerHandView"
         android:layout_width="fill_parent"
-        android:layout_height="133dp"
+        android:layout_height="150dp"
         android:background="#C9D8A7"
         android:fadeScrollbars="true"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
@@ -33,16 +75,16 @@
         android:splitMotionEvents="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:id="@+id/playerHand"
             android:layout_width="wrap_content"
-            android:layout_height="147dp"
+            android:layout_height="fill_parent"
             android:gravity="center"
             android:orientation="horizontal" />
     </HorizontalScrollView>
@@ -153,12 +195,14 @@
         android:layout_height="121dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.309"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.745"
         app:srcCompat="?attr/actionModeSplitBackground" />
 
     //PLAYER DISCARD
+
     <TextView
         android:id="@+id/DiscardPileLabel"
         android:layout_width="wrap_content"
@@ -186,23 +230,18 @@
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/HouseGrid"
-        android:layout_width="395dp"
-        android:layout_height="186dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="388dp"
+        android:layout_height="206dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415"></android.support.v7.widget.GridLayout>
+        app:layout_constraintVertical_bias="0.427"></android.support.v7.widget.GridLayout>
 
     //DISCARD PILES SCROLLING VIEW
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/discardPilePage"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="#80E5E5E5"
@@ -212,8 +251,8 @@
             android:id="@+id/discardPileView"
             android:layout_width="300dp"
             android:layout_height="160dp"
-            android:fadeScrollbars="true"
             android:background="@drawable/popupbg"
+            android:fadeScrollbars="true"
             android:scrollbarAlwaysDrawHorizontalTrack="false"
             android:scrollbarAlwaysDrawVerticalTrack="false"
             android:scrollbars="none"
@@ -231,9 +270,9 @@
                 android:id="@+id/discardPiles"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingTop="50dp"
+                android:orientation="horizontal"
                 android:paddingLeft="15dp"
-                android:orientation="horizontal">
+                android:paddingTop="50dp">
 
             </LinearLayout>
         </HorizontalScrollView>
@@ -353,6 +392,7 @@
             app:layout_constraintStart_toStartOf="@id/endGameScreen"
             app:layout_constraintTop_toTopOf="@id/endGameScreen"
             app:layout_constraintVertical_bias=".90" />
+
 
     </android.support.constraint.ConstraintLayout>
 
