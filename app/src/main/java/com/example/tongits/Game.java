@@ -707,17 +707,30 @@ public class Game extends AppCompatActivity {
         int AI1Points = calculatePoints(AI1Hand);
         int AI2Points = calculatePoints(AI2Hand);
 
-        if ((playerPoints < AI1Points) && (playerPoints < AI2Points)) {
-            endgameMessage.setText("You Win!");
-        } else if ((playerPoints > AI1Points) && (playerPoints > AI2Points)) {
-            endgameMessage.setText("You lost :(");
-        } else {
-            endgameMessage.setText("You tied!");
+        int winningPoints = Math.min(Math.min(AI1Points,AI2Points),playerPoints); //finding min of 3 ints
+
+        //pretty sure this block takes care of all the possibilities
+        if (playerPoints!=winningPoints){
+            if (AI1Points == winningPoints && AI1Points != AI2Points)
+                endgameMessage.setText("Opponent 1 Won :(");
+            else if (AI2Points == winningPoints && AI2Points != AI1Points)
+                endgameMessage.setText("Opponent 2 Won :(");
+            else
+                endgameMessage.setText("Opponent 1 and 2 Tied :(");
+        }
+        else{ //playerPoints = winningPoints = min(points)
+            if (playerPoints < AI1Points && playerPoints < AI2Points)
+                endgameMessage.setText("YOU WIN!!!");
+            else if (playerPoints == AI2Points && playerPoints == AI1Points)
+                endgameMessage.setText("3 Way Tie!");
+            else if (AI2Points < AI1Points)
+                endgameMessage.setText("You Tie With Opponent 2");
+            else
+                endgameMessage.setText("You Tie With Opponent 1");
         }
 
-        String message = "Your Points: " + playerPoints + "\nAI 1 Points: " + AI1Points + "\nAI 2 Points: " + AI2Points;
+        String message = "Your Points: " + playerPoints + "\nOpponent 1 Points: " + AI1Points + "\nOpponent 2 Points: " + AI2Points;
         pointsMessage.setText(message);
-
         EndGamePage.setVisibility(View.VISIBLE);
     }
 
@@ -725,7 +738,10 @@ public class Game extends AppCompatActivity {
         int totalScore = 0;
 
         for (int i = 0; i < deck.size(); i++){
-            totalScore += deck.get(i).getValue();
+            if (deck.get(i).getValue() > 10)
+                totalScore+=10;
+            else
+                totalScore += deck.get(i).getValue();
         }
 
         return totalScore;
