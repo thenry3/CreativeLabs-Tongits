@@ -872,6 +872,82 @@ public class Game extends AppCompatActivity {
     }
 
     void gameOver(){
+        // Check if any player has any houses left
+        if (AI2Hand.size() >= 3)
+        {
+            ArrayList<Card> temp = new ArrayList<>();
+            for (int i = 0; i < AI2Hand.size(); i++) {
+                for (int j = 0; j < AI2Hand.size(); j++) {
+                    for (int k = 0; k < AI2Hand.size(); k++) {
+                        if (i != k && i != j && j != k) {
+                            temp.add(AI2Hand.get(i));
+                            temp.add(AI2Hand.get(k));
+                            temp.add(AI2Hand.get(j));
+                            if (isValidHouse(temp))
+                            {
+                                houses.add(new House(temp));
+                                for (int l = 0; l < temp.size(); l++)
+                                    AI2Hand.remove(temp.get(l));
+                                temp.clear();
+                                updateHouses();
+                            }
+                            temp.clear();
+                        }
+                    }
+                }
+            }
+        }
+
+        if (AI1Hand.size() >= 3)
+        {
+            ArrayList<Card> temp = new ArrayList<>();
+            for (int i = 0; i < AI1Hand.size(); i++) {
+                for (int j = 0; j < AI1Hand.size(); j++) {
+                    for (int k = 0; k < AI1Hand.size(); k++) {
+                        if (i != k && i != j && j != k) {
+                            temp.add(AI1Hand.get(i));
+                            temp.add(AI1Hand.get(k));
+                            temp.add(AI1Hand.get(j));
+                            if (isValidHouse(temp))
+                            {
+                                houses.add(new House(temp));
+                                for (int l = 0; l < temp.size(); l++)
+                                    AI1Hand.remove(temp.get(l));
+                                temp.clear();
+                                updateHouses();
+                            }
+                            temp.clear();
+                        }
+                    }
+                }
+            }
+        }
+
+        if (playerHand.size() >= 3)
+        {
+            ArrayList<Card> temp = new ArrayList<>();
+            for (int i = 0; i < playerHand.size(); i++) {
+                for (int j = 0; j < playerHand.size(); j++) {
+                    for (int k = 0; k < playerHand.size(); k++) {
+                        if (i != k && i != j && j != k) {
+                            temp.add(playerHand.get(i));
+                            temp.add(playerHand.get(k));
+                            temp.add(playerHand.get(j));
+                            if (isValidHouse(temp))
+                            {
+                                houses.add(new House(temp));
+                                for (int l = 0; l < temp.size(); l++)
+                                    playerHand.remove(temp.get(l));
+                                temp.clear();
+                                updateHouses();
+                            }
+                            temp.clear();
+                        }
+                    }
+                }
+            }
+        }
+
         int playerPoints = calculatePoints(playerHand);
         int AI1Points = calculatePoints(AI1Hand);
         int AI2Points = calculatePoints(AI2Hand);
