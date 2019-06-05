@@ -125,9 +125,12 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (playerDrawTurn && playerTurn && AI2Discard.size() > 0) {
-                    playerHand.add(deckOfCards.topCard());
-                    deckOfCards.removeCard();
+                    playerHand.add(AI2Discard.remove(AI2Discard.size() - 1));
                     updateHand();
+                    if (AI2Discard.isEmpty())
+                        AI2DiscardView.setBackgroundResource(0);
+                    else
+                        setNewCardImage(AI2Discard.get(AI2Discard.size() - 1).getSuit(), AI2Discard.get(AI2Discard.size() - 1).getValue(), AI2DiscardView);
                     playerDrawTurn = false;
                 }
 
