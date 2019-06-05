@@ -20,13 +20,14 @@ public class Game extends AppCompatActivity {
 
     ImageView mainDeckView; //the icon for the main deck
     LinearLayout viewHand; //holds player's cards
-    LinearLayout DiscardPilePage;
+    LinearLayout DiscardPile;
+    ConstraintLayout DiscardPilePage;
 
     GridLayout HouseLayoutGameScreen; //holds the top cards of the players' houses
 
     ImageButton AI1DiscardView;
-    ImageButton playerDiscardView;
     ImageButton AI2DiscardView;
+    ImageButton playerDiscardView;
 
 
     ArrayList<Card> playerHand; //array to hold player's cards
@@ -41,7 +42,7 @@ public class Game extends AppCompatActivity {
     ArrayList<Card> AI2Hand;
     boolean playerDrawTurn = true; //keeps track of player's turn
 
-    static boolean activeAI1 = false; //is the AI1DiscardPilePage Linear Layout open or not?
+    static boolean activeAI1 = false; //is the AI1DiscardPile Linear Layout open or not?
     static boolean activeAI2 = false; //same for AI2
     static boolean activePlayer = false; //same, but for player
     static int tracker1 = 0; //trying to see if the same button is pressed twice
@@ -63,8 +64,8 @@ public class Game extends AppCompatActivity {
         viewHand.getLayoutParams().width = 100;
         //HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
 
-        DiscardPilePage = findViewById(R.id.AI1DiscardPilePage); //this line matters! links to the name of the linear layout in the XML file
-
+        DiscardPile = findViewById(R.id.discardPiles); //this line matters! links to the name of the linear layout in the XML file
+        DiscardPilePage = findViewById(R.id.discardPilePage); //links to constraint layout that controls display of cards
 
         AI1DiscardView = findViewById(R.id.AI1DiscardPile);
         AI2DiscardView = findViewById(R.id.AI2DiscardPile);
@@ -112,8 +113,6 @@ public class Game extends AppCompatActivity {
                 }
             }
         });
-
-
 
         AI1DiscardView.setOnClickListener(new View.OnClickListener() { //this is for the first AI view
             @Override
@@ -176,6 +175,9 @@ public class Game extends AppCompatActivity {
 
     }
 
+    public void onGameReturn (View view){
+        finish();
+    }
 
     void dealCards(Deck deck, ArrayList<Card> playerDeck, int numCards){
         for (int i = 0; i < numCards; i++) {
@@ -253,10 +255,12 @@ public class Game extends AppCompatActivity {
                     playerDiscard.add(playerHand.remove(index/2));
                     updateDiscardPile(3);
                     updateHand();
+                    setNewCardImage(playerDiscard.get(playerDiscard.size() - 1).getSuit(), playerDiscard.get(playerDiscard.size() - 1).getValue(), playerDiscardView);
                 }
             });
         }
     }
+
     void updateHouses(){
         HouseLayoutGameScreen.removeAllViews();
         for (int i = 0; i < houses.size(); i++){
@@ -273,30 +277,30 @@ public class Game extends AppCompatActivity {
     }
 
     void updateDiscardPile(int ai) { //1 = ai1, 2 = ai2, 3 = player
-        DiscardPilePage.removeAllViews();
+        DiscardPile.removeAllViews();
         if (ai == 1) {
             for (int i = 0; i < AI1Discard.size(); i++) {
                 ImageButton card = new ImageButton(this);
                 setNewCardImage(AI1Discard.get(i).getSuit(), AI1Discard.get(i).getValue(), card);
                 card.setAdjustViewBounds(true);
-                card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
-                DiscardPilePage.addView(card);
+                card.setLayoutParams(new LinearLayout.LayoutParams(180, 280));
+                DiscardPile.addView(card);
 
                 View space = new Space(this);
                 space.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
-                DiscardPilePage.addView(space);
+                DiscardPile.addView(space);
             }
         } else if (ai == 2) {
             for (int i = 0; i < AI2Discard.size(); i++) {
                 ImageButton card = new ImageButton(this);
                 setNewCardImage(AI2Discard.get(i).getSuit(), AI2Discard.get(i).getValue(), card);
                 card.setAdjustViewBounds(true);
-                card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
-                DiscardPilePage.addView(card);
+                card.setLayoutParams(new LinearLayout.LayoutParams(180, 280));
+                DiscardPile.addView(card);
 
                 View space = new Space(this);
                 space.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
-                DiscardPilePage.addView(space);
+                DiscardPile.addView(space);
             }
         }
         else if (ai == 3){
@@ -304,12 +308,12 @@ public class Game extends AppCompatActivity {
                 ImageButton card = new ImageButton(this);
                 setNewCardImage(playerDiscard.get(i).getSuit(), playerDiscard.get(i).getValue(), card);
                 card.setAdjustViewBounds(true);
-                card.setLayoutParams(new LinearLayout.LayoutParams(258, 400));
-                DiscardPilePage.addView(card);
+                card.setLayoutParams(new LinearLayout.LayoutParams(180, 280));
+                DiscardPile.addView(card);
 
                 View space = new Space(this);
                 space.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
-                DiscardPilePage.addView(space);
+                DiscardPile.addView(space);
             }
         }
     }
