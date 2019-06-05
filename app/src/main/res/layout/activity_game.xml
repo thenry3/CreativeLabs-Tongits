@@ -128,16 +128,14 @@
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/HouseGrid"
-        android:layout_width="395dp"
-        android:layout_height="186dp"
+        android:layout_width="389dp"
+        android:layout_height="239dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.33">
-
-    </android.support.v7.widget.GridLayout>
+        app:layout_constraintVertical_bias="0.393"></android.support.v7.widget.GridLayout>
 
     <ImageView
         android:id="@+id/AI1Back"
