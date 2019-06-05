@@ -8,6 +8,7 @@
     tools:context=".Game">
 
     //PAGE HEADER
+
     <TextView
         android:id="@+id/gameTitle"
         style="@style/HeaderText"
@@ -16,15 +17,16 @@
         android:gravity="center"
         android:onClick="onGameReturn"
         android:text="T O N G I T S"
-        app:layout_constraintTop_toTopOf="parent"
-        app:fontFamily="@font/roboto" />
+        app:fontFamily="@font/roboto"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     //PLAYER HAND SCROLLING VIEW
+
     <HorizontalScrollView
         android:id="@+id/playerHandView"
         android:layout_width="fill_parent"
-        android:layout_height="133dp"
+        android:layout_height="150dp"
         android:background="#C9D8A7"
         android:fadeScrollbars="true"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
@@ -33,16 +35,16 @@
         android:splitMotionEvents="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:id="@+id/playerHand"
             android:layout_width="wrap_content"
-            android:layout_height="147dp"
+            android:layout_height="fill_parent"
             android:gravity="center"
             android:orientation="horizontal" />
     </HorizontalScrollView>
@@ -147,12 +149,14 @@
         android:layout_height="121dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.336"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.745"
         app:srcCompat="?attr/actionModeSplitBackground" />
 
     //PLAYER DISCARD
+
     <TextView
         android:id="@+id/DiscardPileLabel"
         android:layout_width="wrap_content"
@@ -180,18 +184,13 @@
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/HouseGrid"
-        android:layout_width="395dp"
-        android:layout_height="186dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="388dp"
+        android:layout_height="206dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415"></android.support.v7.widget.GridLayout>
+        app:layout_constraintVertical_bias="0.427"></android.support.v7.widget.GridLayout>
 
     <ImageView
         android:id="@+id/AI1Back"
@@ -230,20 +229,21 @@
         app:srcCompat="@color/topbarcolor" />
 
     //DISCARD PILES SCROLLING VIEW
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/discardPilePage"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="#E5E5E5"
-        android:backgroundTintMode="multiply">
+        android:backgroundTintMode="multiply"
+        android:visibility="invisible">
 
         <HorizontalScrollView
             android:id="@+id/discardPileView"
             android:layout_width="300dp"
             android:layout_height="160dp"
-            android:fadeScrollbars="true"
             android:background="@drawable/popupbg"
+            android:fadeScrollbars="true"
             android:scrollbarAlwaysDrawHorizontalTrack="false"
             android:scrollbarAlwaysDrawVerticalTrack="false"
             android:scrollbars="none"
@@ -261,9 +261,9 @@
                 android:id="@+id/discardPiles"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingTop="50dp"
+                android:orientation="horizontal"
                 android:paddingLeft="15dp"
-                android:orientation="horizontal">
+                android:paddingTop="50dp">
 
             </LinearLayout>
         </HorizontalScrollView>
@@ -272,15 +272,14 @@
             android:id="@+id/discardPileViewLabel"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            app:layout_constraintTop_toTopOf="@id/discardPileView"
-            app:layout_constraintLeft_toLeftOf="@id/discardPileView"
-            app:layout_constraintRight_toRightOf="@id/discardPileView"
+            android:fontFamily="@font/roboto"
             android:gravity="center"
             android:text="D I S C A R D  P I L E"
-            android:fontFamily="@font/roboto"
-            android:textSize="20dp"
             android:textColor="#FFFFFF"
-            />
+            android:textSize="20dp"
+            app:layout_constraintLeft_toLeftOf="@id/discardPileView"
+            app:layout_constraintRight_toRightOf="@id/discardPileView"
+            app:layout_constraintTop_toTopOf="@id/discardPileView" />
 
     </android.support.constraint.ConstraintLayout>
 

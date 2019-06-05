@@ -227,7 +227,7 @@ public class Game extends AppCompatActivity {
         int highindex = 0;
         if (deck.size() > 1) {
             for (int i = 1; i < deck.size(); i++) {
-                if (deck.get(i).compareCard(deck.get(highindex)) < 0)
+                if (deck.get(i).compareCard(deck.get(highindex)) > 0)
                     highindex = i;
             }
         }
@@ -333,7 +333,6 @@ public class Game extends AppCompatActivity {
                     int index = viewHand.indexOfChild(card);
                     SelectedCards.add(playerHand.get(index/2));
                     card.getBackground().setColorFilter(Color.argb(150, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
-                    Log.d("df", "sdfs");
                     return true;
                 }
             });
@@ -605,8 +604,14 @@ public class Game extends AppCompatActivity {
         }
         //checking if consecutive #s
         boolean isConsecutive = true;
-        for (int i = 0; i < card_list.size()-1; i++){
-            if (card_list.get(i+1).getValue() - card_list.get(i).getValue() !=1){
+        ArrayList<Card> temp = new ArrayList<>(card_list);
+        ArrayList<Integer> values =  new ArrayList<>();
+        while (!temp.isEmpty())
+            values.add(temp.remove(findHighestCard(temp)).getValue());
+        for (int i = 0; i < values.size() - 1; i++)
+        {
+            if (values.get(i) - values.get(i + 1) != 1)
+            {
                 isConsecutive = false;
                 break;
             }
