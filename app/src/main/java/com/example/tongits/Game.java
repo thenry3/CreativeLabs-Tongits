@@ -707,7 +707,7 @@ public class Game extends AppCompatActivity {
         int AI1Points = calculatePoints(AI1Hand);
         int AI2Points = calculatePoints(AI2Hand);
 
-        if ((playerPoints < AI1Points) || (playerPoints < AI2Points)) {
+        if ((playerPoints < AI1Points) && (playerPoints < AI2Points)) {
             endgameMessage.setText("You Win!");
         } else if ((playerPoints > AI1Points) && (playerPoints > AI2Points)) {
             endgameMessage.setText("You lost :(");
