@@ -24,7 +24,7 @@ public class Game extends AppCompatActivity {
     LinearLayout viewHand; //holds player's cards
     LinearLayout DiscardPilePage;
 
-    GridLayout HouseLayoutGameScreen; //holds the top cards of the players' houses
+    android.support.v7.widget.GridLayout HouseLayoutGameScreen; //holds the top cards of the players' houses
 
     ImageButton AI1DiscardView;
     ImageButton playerDiscardView;
@@ -36,7 +36,7 @@ public class Game extends AppCompatActivity {
     ArrayList<Card> AI1Discard; //AI 1's discard- AI 2 takes from this
     ArrayList<Card> AI2Discard; //AI 2's discard - Player takes from this
 
-    ArrayList<House> houses;
+    ArrayList<House> houses=new ArrayList<>();
 
     //arrays to hold AIs' hands
     ArrayList<Card> AI1Hand;
@@ -64,13 +64,13 @@ public class Game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
         // initialize variables with Views
         mainDeckView = findViewById(R.id.cardDeck);
         mainDeckView.setImageResource(R.drawable.back);
         viewHand = findViewById(R.id.playerHand);
         viewHand.getLayoutParams().width = 100;
-        //HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
+
+        HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
 
         DiscardPilePage = findViewById(R.id.DiscardPilePage); //this line matters! links to the name of the linear layout in the XML file
 
@@ -79,7 +79,6 @@ public class Game extends AppCompatActivity {
         AI2DiscardView = findViewById(R.id.AI2DiscardPile);
         playerDiscardView = findViewById(R.id.playerDiscardPile);
 
-        //AI1DiscardView.getLayoutParams().width = 100; this line is unnecessary? idk what it does
 
         //shuffle a few times for good measure
         for (int i = 0; i < 20; i++){
@@ -104,7 +103,8 @@ public class Game extends AppCompatActivity {
 
         // update player hand view
         updateHand();
-        //updateHouses();
+
+        updateHouses(); //might interfere w/ update hand idk
 
         //button to allow player to draw card from main deck
         mainDeckView.setOnClickListener(new View.OnClickListener() {
@@ -332,8 +332,9 @@ public class Game extends AppCompatActivity {
     }
     void updateHouses(){
         HouseLayoutGameScreen.removeAllViews();
+
         for (int i = 0; i < houses.size(); i++){
-            ImageButton card = new ImageButton(this);
+           ImageButton card = new ImageButton(this);
             setNewCardImage(houses.get(i).returnTopCard().getSuit(),houses.get(i).returnTopCard().getValue(),card);
             card.setAdjustViewBounds(true);
             card.setLayoutParams(new LinearLayout.LayoutParams(258,400));
