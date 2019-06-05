@@ -108,12 +108,15 @@
         app:layout_constraintVertical_bias="0.021" />
 
     <ImageView
-        android:id="@+id/AI1Pile"
-        android:layout_width="50dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintRight_toRightOf="@id/AI1Label"
+        android:id="@+id/AI1Back"
+        android:layout_width="78dp"
+        android:layout_height="121dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/AI1Label"
+        app:layout_constraintVertical_bias="0.003"
         app:srcCompat="@drawable/back" />
 
     <ImageButton
@@ -147,12 +150,15 @@
         app:layout_constraintVertical_bias="0.021" />
 
     <ImageView
-        android:id="@+id/AI2Pile"
-        android:layout_width="50dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintLeft_toLeftOf="@id/AI2Label"
+        android:id="@+id/AI2Back"
+        android:layout_width="78dp"
+        android:layout_height="121dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/AI2Label"
+        app:layout_constraintVertical_bias="0.001"
         app:srcCompat="@drawable/back" />
 
     <ImageButton
@@ -232,51 +238,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.427"></android.support.v7.widget.GridLayout>
 
-    <ImageView
-        android:id="@+id/AI1Back"
-        android:layout_width="78dp"
-        android:layout_height="121dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.152"
-        app:srcCompat="@drawable/back" />
-
-    <ImageView
-        android:id="@+id/AI2Back"
-        android:layout_width="78dp"
-        android:layout_height="121dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.152"
-        app:srcCompat="@drawable/back" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="fill_parent"
-        android:layout_height="68dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@color/topbarcolor" />
-
     //DISCARD PILES SCROLLING VIEW
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/discardPilePage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="#E5E5E5"
-        android:backgroundTintMode="multiply"
-        android:visibility="invisible">
+        android:backgroundTint="#80E5E5E5"
+        android:backgroundTintMode="multiply">
 
         <HorizontalScrollView
             android:id="@+id/discardPileView"
@@ -317,10 +286,115 @@
             android:text="D I S C A R D  P I L E"
             android:textColor="#FFFFFF"
             android:textSize="20dp"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="@id/discardPileView"
             app:layout_constraintRight_toRightOf="@id/discardPileView"
             app:layout_constraintTop_toTopOf="@id/discardPileView" />
 
     </android.support.constraint.ConstraintLayout>
+
+    //END GAME SCREEN
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/endGamePopup"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="#80E5E5E5"
+        android:backgroundTintMode="multiply">
+
+
+        <LinearLayout
+            android:id="@+id/endGameScreen"
+            android:layout_width="250dp"
+            android:layout_height="350dp"
+            android:background="@drawable/popupbg"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.419">
+
+            <TextView
+                android:id="@+id/endScreenLabel"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:text="G A M E  O V E R"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@id/endGameScreen"
+                app:layout_constraintRight_toRightOf="@id/endGameScreen"
+                app:layout_constraintTop_toTopOf="@id/endGameScreen" />
+
+            <TextView
+                android:id="@+id/gameStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="You Lost :("
+                android:textColor="#494949"
+                android:paddingTop="20dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="Your Points:"
+                android:textColor="#494949"
+                android:paddingTop="20dp"
+                android:textSize="16dp"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/playButton"
+            android:layout_width="190dp"
+            android:layout_height="42dp"
+            android:background="@drawable/play_button"
+            android:onClick="onGameReturn"
+            android:text="P L A Y  A G A I N"
+            android:textColor="#FFFFFF"
+            android:textScaleX="1"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/endGameScreen"
+            app:layout_constraintEnd_toEndOf="@id/endGameScreen"
+            app:layout_constraintStart_toStartOf="@id/endGameScreen"
+            app:layout_constraintTop_toTopOf="@id/endGameScreen"
+            app:layout_constraintVertical_bias="0.70" />
+
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="190dp"
+            android:layout_height="42dp"
+            android:background="@drawable/play_button"
+            android:onClick="onGameReturn"
+            android:text="E X I T"
+            android:textColor="#FFFFFF"
+            android:textScaleX="1"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/endGameScreen"
+            app:layout_constraintEnd_toEndOf="@id/endGameScreen"
+            app:layout_constraintStart_toStartOf="@id/endGameScreen"
+            app:layout_constraintTop_toTopOf="@id/endGameScreen"
+            app:layout_constraintVertical_bias=".90" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
 
 </android.support.constraint.ConstraintLayout>

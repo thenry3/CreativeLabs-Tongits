@@ -1,6 +1,8 @@
 package com.example.tongits;
 
 
+import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +27,10 @@ public class Game extends AppCompatActivity {
     LinearLayout viewHand; //holds player's cards
     LinearLayout DiscardPile;
     ConstraintLayout DiscardPilePage;
+
+    ConstraintLayout EndGamePage;
+    TextView endgameMessage;
+    TextView pointsMessage;
 
     android.support.v7.widget.GridLayout HouseLayoutGameScreen; //holds the top cards of the players' houses
 
@@ -78,8 +84,11 @@ public class Game extends AppCompatActivity {
 
         DiscardPile = findViewById(R.id.discardPiles); //this line matters! links to the name of the linear layout in the XML file
         DiscardPilePage = findViewById(R.id.discardPilePage); //links to constraint layout that controls display of cards
-        
-      HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
+        EndGamePage = findViewById(R.id.endGamePopup);
+        endgameMessage = findViewById(R.id.gameStatus);
+        pointsMessage = findViewById(R.id.points);
+
+        HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
 
         AI1DiscardView = findViewById(R.id.AI1DiscardPile);
         AI2DiscardView = findViewById(R.id.AI2DiscardPile);
@@ -118,7 +127,7 @@ public class Game extends AppCompatActivity {
         mainDeckView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             if (playerDrawTurn && playerTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
+                if (playerDrawTurn && playerTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
                     playerHand.add(deckOfCards.topCard());
                     deckOfCards.removeCard();
                     updateHand();
@@ -201,9 +210,9 @@ public class Game extends AppCompatActivity {
                     DiscardPilePage.setVisibility(View.GONE);
                     tracker1=tracker2=playertracker=0;
                 }
-                else
+                else {
                     DiscardPilePage.setVisibility(View.VISIBLE);
-
+                }
                 playertracker++;
                 tracker1=tracker2=0;
                 if (playertracker>=2) { //this line jank asf
@@ -245,6 +254,7 @@ public class Game extends AppCompatActivity {
 
     }
 
+    //finishes current activity (game screen) and returns to main menu
     public void onGameReturn (View view){
         finish();
     }
@@ -272,6 +282,9 @@ public class Game extends AppCompatActivity {
     // Have AIs' take a card from main deck and discard their highest valued card
     void AITurn(Deck deck){
         if (playerDrawTurn || playerTurn || deck.getNumberOfCardsInDeck() < 1) {
+            if (deck.getNumberOfCardsInDeck() < 1) {
+                gameFinished = true;
+            }
             return;
         }
         // AI 1 draw card and discard
@@ -353,9 +366,15 @@ public class Game extends AppCompatActivity {
                     playerTurn = false;
                     playerDiscard.add(playerHand.remove(index/2));
                     updateDiscardPile(3);
-                    AITurn(deckOfCards);
                     updateHand();
                     setNewCardImage(playerDiscard.get(playerDiscard.size() - 1).getSuit(), playerDiscard.get(playerDiscard.size() - 1).getValue(), playerDiscardView);
+
+                    //check game over
+                    if (deckOfCards.getNumberOfCardsInDeck() == 0 || playerHand.size() == 0) {
+                        gameOver();
+                    }
+
+                    AITurn(deckOfCards);
                 }
             });
 
@@ -681,5 +700,34 @@ public class Game extends AppCompatActivity {
         }
 
         return isSameValue || (isSameSuit && isConsecutive);
+    }
+
+    void gameOver(){
+        int playerPoints = calculatePoints(playerHand);
+        int AI1Points = calculatePoints(AI1Hand);
+        int AI2Points = calculatePoints(AI2Hand);
+
+        if ((playerPoints < AI1Points) || (playerPoints < AI2Points)) {
+            endgameMessage.setText("You Win!");
+        } else if ((playerPoints > AI1Points) && (playerPoints > AI2Points)) {
+            endgameMessage.setText("You lost :(");
+        } else {
+            endgameMessage.setText("You tied!");
+        }
+
+        String message = "Your Points: " + playerPoints + "\nAI 1 Points: " + AI1Points + "\nAI 2 Points: " + AI2Points;
+        pointsMessage.setText(message);
+
+        EndGamePage.setVisibility(View.VISIBLE);
+    }
+
+    int calculatePoints(ArrayList<Card> deck) {
+        int totalScore = 0;
+
+        for (int i = 0; i < deck.size(); i++){
+            totalScore += deck.get(i).getValue();
+        }
+
+        return totalScore;
     }
 }
