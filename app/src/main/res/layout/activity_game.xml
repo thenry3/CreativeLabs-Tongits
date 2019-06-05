@@ -102,10 +102,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.974"
+        app:layout_constraintHorizontal_bias="0.965"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gameTitle"
-        app:layout_constraintVertical_bias="0.021" />
+        app:layout_constraintVertical_bias="0.007" />
 
     <ImageView
         android:id="@+id/AI1Back"
@@ -147,7 +147,7 @@
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gameTitle"
-        app:layout_constraintVertical_bias="0.021" />
+        app:layout_constraintVertical_bias="0.006" />
 
     <ImageView
         android:id="@+id/AI2Back"
@@ -193,13 +193,13 @@
         android:id="@+id/cardDeck"
         android:layout_width="78dp"
         android:layout_height="121dp"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.309"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.745"
-        app:srcCompat="?attr/actionModeSplitBackground" />
+        app:layout_constraintVertical_bias="0.745" />
 
     //PLAYER DISCARD
 
@@ -230,8 +230,8 @@
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/HouseGrid"
-        android:layout_width="388dp"
-        android:layout_height="206dp"
+        android:layout_width="390dp"
+        android:layout_height="233dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

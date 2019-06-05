@@ -14,7 +14,7 @@ public class House{
     }
 
     public Card returnTopCard(){
-        return card_house_list.get(0);
+        return card_house_list.get(card_house_list.size() - 1);
     }
 
     public boolean addCard (Card c){

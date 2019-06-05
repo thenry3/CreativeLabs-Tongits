@@ -139,7 +139,7 @@ public class Game extends AppCompatActivity {
         AI2DiscardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (playerDrawTurn && playerTurn && AI2Discard.size() > 0) {
+                if (playerDrawTurn && playerTurn && AI2Discard.size() > 0 && canDrawFromDiscard(playerHand, AI2Discard.get(AI2Discard.size() - 1))) {
                     playerHand.add(AI2Discard.remove(AI2Discard.size() - 1));
                     updateHand();
                     if (AI2Discard.isEmpty())
@@ -239,6 +239,12 @@ public class Game extends AppCompatActivity {
                 for (int i = 0; i < SelectedCards.size(); i++)
                     playerHand.remove(SelectedCards.get(i));
 
+                SelectedCards.clear();
+                selectMode = false;
+
+                makeHouseButton.setVisibility(View.GONE);
+                addHouseButton.setVisibility(View.GONE);
+
                 updateHand();
                 updateHouses();
 
@@ -248,7 +254,12 @@ public class Game extends AppCompatActivity {
         addHouseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addMode = true;
+                addMode = !addMode;
+
+                if (addMode)
+                    addHouseButton.getBackground().setColorFilter(Color.argb(150, 0,0, 0), PorterDuff.Mode.SRC_ATOP);
+                else
+                    addHouseButton.getBackground().setColorFilter(Color.argb(0, 0,0, 0), PorterDuff.Mode.SRC_ATOP);
             }
         });
 
@@ -294,6 +305,11 @@ public class Game extends AppCompatActivity {
         AI1Discard.add(AI1Hand.get(highcardindex));
         AI1Hand.remove(highcardindex);
         setNewCardImage(AI1Discard.get(AI1Discard.size() - 1).getSuit(), AI1Discard.get(AI1Discard.size() - 1).getValue(), AI1DiscardView);
+        if (deckOfCards.getNumberOfCardsInDeck() == 0)
+            mainDeckView.setBackgroundResource(0);
+        if (deckOfCards.getNumberOfCardsInDeck() == 0 || playerHand.size() == 0) {
+            gameOver();
+        }
 
         // AI 2 turn
         AI2Hand.add(deck.topCard());
@@ -302,6 +318,11 @@ public class Game extends AppCompatActivity {
         AI2Discard.add(AI2Hand.get(highcardindex));
         AI2Hand.remove(highcardindex);
         setNewCardImage(AI2Discard.get(AI2Discard.size() - 1).getSuit(), AI2Discard.get(AI2Discard.size() - 1).getValue(), AI2DiscardView);
+        if (deckOfCards.getNumberOfCardsInDeck() == 0)
+            mainDeckView.setBackgroundResource(0);
+        if (deckOfCards.getNumberOfCardsInDeck() == 0 || playerHand.size() == 0) {
+            gameOver();
+        }
 
         playerDrawTurn = true; //end AIs' turns
         playerTurn = true;
@@ -369,6 +390,9 @@ public class Game extends AppCompatActivity {
                     updateHand();
                     setNewCardImage(playerDiscard.get(playerDiscard.size() - 1).getSuit(), playerDiscard.get(playerDiscard.size() - 1).getValue(), playerDiscardView);
 
+                    if (deckOfCards.getNumberOfCardsInDeck() == 0)
+                        mainDeckView.setBackgroundResource(0);
+
                     //check game over
                     if (deckOfCards.getNumberOfCardsInDeck() == 0 || playerHand.size() == 0) {
                         gameOver();
@@ -407,7 +431,7 @@ public class Game extends AppCompatActivity {
         HouseLayoutGameScreen.removeAllViews();
 
         for (int i = 0; i < houses.size(); i++){
-            ImageButton card = new ImageButton(this);
+            final ImageButton card = new ImageButton(this);
             setNewCardImage(houses.get(i).returnTopCard().getSuit(),houses.get(i).returnTopCard().getValue(),card);
             card.getBackground().setColorFilter(Color.argb(0, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
             card.setAdjustViewBounds(true);
@@ -417,6 +441,44 @@ public class Game extends AppCompatActivity {
             View space = new Space (this);
             space.setLayoutParams(new LinearLayout.LayoutParams(100,100));
             HouseLayoutGameScreen.addView(space);
+
+            // add to existing house
+            card.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    if (!addMode)
+                        return;
+
+                    int index = HouseLayoutGameScreen.indexOfChild(card);
+                    ArrayList<Card> temp = new ArrayList<>(houses.get(index/2).card_house_list);
+
+                    for (int i = 0; i < SelectedCards.size(); i++)
+                        temp.add(SelectedCards.get(i));
+
+                    if (!isValidHouse(temp))
+                        return;
+
+                    for (int i = 0; i < SelectedCards.size(); i++)
+                        houses.get(index/2).card_house_list.add(SelectedCards.get(i));
+
+                    for (int i = 0; i < SelectedCards.size(); i++)
+                        houses.get(index/2).card_house_list.remove(SelectedCards.get(i));
+
+                    selectMode = false;
+                    addMode = false;
+
+                    updateHand();
+                    updateHouses();
+                }
+            });
+
+            card.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    // view cards in hand
+
+                }
+            });
         }
     }
 
