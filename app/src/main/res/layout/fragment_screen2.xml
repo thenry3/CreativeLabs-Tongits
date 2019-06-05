@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#80FFFFFF">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Objective"
+            android:fontFamily="@font/roboto"
+            android:textSize="20sp"
+            android:textColor="#494949"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Draw &amp; discard. Form houses. Minimize points in your hand."
+            android:fontFamily="@font/roboto"
+            android:textSize="18sp"
+            android:textColor="#494949"
+            android:textStyle="italic"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A house can consist of:\nthree or more consecutive cards of the same suit (such as 4&#9825;, 5&#9825;, 6&#9825; or 8&#9824;, 9&#9824;, 10&#9824;, J&#9824;"
+            android:fontFamily="@font/roboto"
+            android:textSize="16sp"
+            android:textColor="#494949"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:fontFamily="@font/roboto"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="#494949"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="three or more cards of the same rank (such as 7&#9827;, 7&#9825;, 7&#9826;."
+            android:fontFamily="@font/roboto"
+            android:textSize="16sp"
+            android:textColor="#494949"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="* A-K-Q of a suit is not a house since aces are low in this game. \n* A card can belong to only one house at a time - you cannot use the same card as part of different houses."
+            android:fontFamily="@font/roboto"
+            android:textSize="16sp"
+            android:textColor="#494949"
+            android:textStyle="italic"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+</RelativeLayout>

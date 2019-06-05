@@ -1,11 +1,20 @@
 <resources>
     <string name="app_name">Tongits</string>
     <string name="edit_message">~Tongits~</string>
-    <string name="button_send">Play</string>
-    <string name="button_send2">Settings</string>
+    <string name="button_send">PLAY</string>
+    <string name="button_send2">SETTINGS</string>
+    <string name="button_send3">INSTRUCTIONS</string>
     <string name="title_activity_display_message">SettingsActivate</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="desc1"><![CDATA[Each turn consists of:\n1. <b>Draw.</b> A player must take a card from either the draw pile, or the previous player\'s last discarded card (if that card allows the player to complete a house, which they must then place down).\n2. <b>Houses.</b> During a player\'s turn, they can place down any completed houses they have, or add card(s) to other players' placed houses (such as adding 8&#9827; to 5&#9827;, 6&#9827;, 7&#9827;.)\n3. <b>Discard.</b> A player ends their turn by discarding a card of their choice.]]></string>
+    <string name="desc2"><![CDATA[<i>Players can choose to hide houses. Hidden houses will <b>not</b> count towards the player\'s point total as long as they have placed <b>at least one house</b> down by the end of the game!\n\nHide houses to <b>prevent other players</b> from adding to them.\n\nView discard piles to remember which cards have been played.</i>]]></string>
+    <string name="desc3"><![CDATA[The game ends when:\n1. <b>The draw pile is empty.<\b> Once the draw pile is empty and the player who drew the last card has discarded, all players reveal their cards and announce their point total. The player with the least amount of points is the winner!\n2. <b>A player calls \"Tongits!\"</b> If a player has no cards left in their hand (by adding to houses and discarding), they call \"Tongits\" and win the game.]]></string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

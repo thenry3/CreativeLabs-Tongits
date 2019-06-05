@@ -169,10 +169,28 @@
         app:fontFamily="@font/roboto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64" />
+        app:layout_constraintVertical_bias="0.630" />
+
+    <Button
+        android:id="@+id/instructionsButton"
+        android:layout_width="190dp"
+        android:layout_height="42dp"
+        android:background="@drawable/play_button"
+        android:onClick="onClickInstructions"
+        android:text="@string/button_send3"
+        android:textColor="#FFFFFF"
+        android:textScaleX="1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:fontFamily="@font/roboto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.740" />
 
     <Button
         android:id="@+id/settingsButton"
@@ -189,10 +207,9 @@
         app:fontFamily="@font/roboto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.775" />
+        app:layout_constraintVertical_bias="0.850" />
 
     <TextView
         android:id="@+id/Title"

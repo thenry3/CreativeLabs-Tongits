@@ -9,6 +9,9 @@ import android.view.View;
 import android.content.*;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import androidx.navigation.Navigation;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,5 +58,10 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent GameIntent = new Intent(this, Game.class);
         startActivity(GameIntent);
+    }
+
+    public void onClickInstructions(View view){
+        Intent InstructIntent = new Intent(this, instructions.class);
+        startActivity(InstructIntent);
     }
 }
