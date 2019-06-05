@@ -476,6 +476,7 @@ public class Game extends AppCompatActivity {
                 @Override
                 public boolean onLongClick(View v) {
                     // view cards in hand
+                    return true;
 
                 }
             });
