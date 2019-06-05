@@ -231,6 +231,8 @@ public class Game extends AppCompatActivity {
                 if (SelectedCards.size() < 3)
                     return;
 
+                addMode = false;
+
                 if (!isValidHouse(SelectedCards))
                     return;
 
@@ -327,6 +329,7 @@ public class Game extends AppCompatActivity {
                                 temp.clear();
                                 updateHouses();
                             }
+                            temp.clear();
                         }
                     }
                 }
@@ -385,6 +388,7 @@ public class Game extends AppCompatActivity {
                                 temp.clear();
                                 updateHouses();
                             }
+                            temp.clear();
                         }
                     }
                 }
@@ -461,6 +465,8 @@ public class Game extends AppCompatActivity {
                         // if nothing is selected, turn off selectMode
                         if (SelectedCards.isEmpty()) {
                             selectMode = false;
+                            addMode = false;
+                            addHouseButton.getBackground().setColorFilter(Color.argb(0, 0,0, 0), PorterDuff.Mode.SRC_ATOP);
                             makeHouseButton.setVisibility(View.GONE);
                             addHouseButton.setVisibility(View.GONE);
                         }
@@ -505,7 +511,8 @@ public class Game extends AppCompatActivity {
                         SelectedCards.clear();
                     }
                     selectMode = true;
-                    addHouseButton.setVisibility(View.VISIBLE);
+                    if (!houses.isEmpty())
+                        addHouseButton.setVisibility(View.VISIBLE);
                     makeHouseButton.setVisibility(View.GONE);
                     int index = viewHand.indexOfChild(card);
                     SelectedCards.add(playerHand.get(index/2));
@@ -552,10 +559,13 @@ public class Game extends AppCompatActivity {
                         houses.get(index/2).card_house_list.add(SelectedCards.get(i));
 
                     for (int i = 0; i < SelectedCards.size(); i++)
-                        houses.get(index/2).card_house_list.remove(SelectedCards.get(i));
+                        playerHand.remove(SelectedCards.get(i));
 
+                    SelectedCards.clear();
                     selectMode = false;
                     addMode = false;
+
+                    addHouseButton.getBackground().setColorFilter(Color.argb(0, 0,0, 0), PorterDuff.Mode.SRC_ATOP);
 
                     updateHand();
                     updateHouses();
