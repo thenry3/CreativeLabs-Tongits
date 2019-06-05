@@ -302,8 +302,11 @@ public class Game extends AppCompatActivity {
         }
         // AI 1 turn
         // See if AI 1 can draw from player discard
-        if (canDrawFromDiscard(AI1Hand, playerDiscard.get(playerDiscard.size() - 1)))
+        if (canDrawFromDiscard(AI1Hand, playerDiscard.get(playerDiscard.size() - 1))) {
             AI1Hand.add(playerDiscard.remove(playerDiscard.size() - 1));
+            if (playerDiscard.isEmpty())
+                playerDiscardView.setBackgroundResource(0);
+        }
         else //if can't pull from player pile
         {
             AI1Hand.add(deck.topCard());
@@ -361,8 +364,11 @@ public class Game extends AppCompatActivity {
 
         // AI 2 turn
         // See if AI 2 can draw from player discard
-        if (canDrawFromDiscard(AI2Hand, AI1Discard.get(AI1Discard.size() - 1)))
+        if (canDrawFromDiscard(AI2Hand, AI1Discard.get(AI1Discard.size() - 1))) {
             AI2Hand.add(AI1Discard.remove(AI1Discard.size() - 1));
+            if (AI1Discard.isEmpty())
+                AI1DiscardView.setBackgroundResource(0);
+        }
         else //if can't pull from player pile
         {
             AI2Hand.add(deck.topCard());
