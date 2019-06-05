@@ -118,11 +118,24 @@ public class Game extends AppCompatActivity {
             }
         });
 
-
-
-        AI1DiscardView.setOnClickListener(new View.OnClickListener() { //this is for the first AI view
+        AI2DiscardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (playerDrawTurn && playerTurn && AI2Discard.size() > 0) {
+                    playerHand.add(deckOfCards.topCard());
+                    deckOfCards.removeCard();
+                    updateHand();
+                    playerDrawTurn = false;
+                }
+
+            }
+        });
+
+
+
+        AI1DiscardView.setOnLongClickListener(new View.OnLongClickListener() { //this is for the first AI view
+            @Override
+            public boolean onLongClick(View v) {
                 updateDiscardPile(1);
 
                 activeAI1 = !activeAI1;
@@ -140,13 +153,14 @@ public class Game extends AppCompatActivity {
                     DiscardPilePage.setVisibility(View.GONE);
                     tracker1 =0;
                 }}
+                return true;
             }
         });
 
 
-        AI2DiscardView.setOnClickListener(new View.OnClickListener() { //this is for the first AI view
+        AI2DiscardView.setOnLongClickListener(new View.OnLongClickListener() { //this is for the first AI view
             @Override
-            public void onClick(View v) {
+            public boolean onLongClick(View v) {
                 updateDiscardPile(2);
                 activeAI2 = !activeAI2;
 
@@ -163,12 +177,14 @@ public class Game extends AppCompatActivity {
                     DiscardPilePage.setVisibility(View.GONE);
                     tracker2 =0;
                 }}
+
+                return true;
             }
         });
 
-        playerDiscardView.setOnClickListener(new View.OnClickListener() { //this is for the first AI view
+        playerDiscardView.setOnLongClickListener(new View.OnLongClickListener() { //this is for the first AI view
             @Override
-            public void onClick(View v) {
+            public boolean onLongClick(View v) {
                 updateDiscardPile(3);
                 activePlayer = !activePlayer;
                 if (activeAI1 == false && activeAI2 == false && activePlayer == false) {
@@ -184,6 +200,8 @@ public class Game extends AppCompatActivity {
                     DiscardPilePage.setVisibility(View.GONE);
                     playertracker = 0;
                 }
+
+                return true;
             }
         });
 
@@ -222,15 +240,6 @@ public class Game extends AppCompatActivity {
         AI1Discard.add(AI1Hand.get(highcardindex));
         AI1Hand.remove(highcardindex);
         setNewCardImage(AI1Discard.get(AI1Discard.size() - 1).getSuit(), AI1Discard.get(AI1Discard.size() - 1).getValue(), AI1DiscardView);
-
-
-//        try {
-//            TimeUnit.SECONDS.sleep(2);
-//        }
-//        catch(InterruptedException ex)
-//        {
-//            Thread.currentThread().interrupt();
-//        }
 
         // AI 2 turn
         AI2Hand.add(deck.topCard());
@@ -324,11 +333,13 @@ public class Game extends AppCompatActivity {
             });
         }
     }
+
+    // update the house grid view
     void updateHouses(){
         HouseLayoutGameScreen.removeAllViews();
 
         for (int i = 0; i < houses.size(); i++){
-           ImageButton card = new ImageButton(this);
+            ImageButton card = new ImageButton(this);
             setNewCardImage(houses.get(i).returnTopCard().getSuit(),houses.get(i).returnTopCard().getValue(),card);
             card.setAdjustViewBounds(true);
             card.setLayoutParams(new LinearLayout.LayoutParams(258,400));
@@ -559,6 +570,42 @@ public class Game extends AppCompatActivity {
                 }
                 break;
         }
+    }
 
+    // checks if a group of cards is a valid house
+    public boolean isValidHouse(ArrayList<Card> card_list)
+    {
+        if (card_list.size() < 3)
+            return false;
+
+        //checking if all the same #
+        boolean isSameValue = true;
+        int initialValue = card_list.get(0).getValue();
+        for (int i = 1; i < card_list.size(); i++){
+            if(!(card_list.get(i).getValue()==initialValue)){
+                isSameValue = false;
+                break;
+            }
+        }
+
+        //checking if the same suit
+        boolean isSameSuit = true;
+        int initialSuit = card_list.get(0).getSuit();
+        for (int i = 1; i < card_list.size(); i++){
+            if (!(card_list.get(i).getSuit() == initialSuit)){
+                isSameSuit=false;
+                break;
+            }
+        }
+        //checking if consecutive #s
+        boolean isConsecutive = true;
+        for (int i = 0; i < card_list.size()-1; i++){
+            if (card_list.get(i+1).getValue() - card_list.get(i).getValue() !=1){
+                isConsecutive = false;
+                break;
+            }
+        }
+
+        return isSameValue || (isSameSuit && isConsecutive);
     }
 }
