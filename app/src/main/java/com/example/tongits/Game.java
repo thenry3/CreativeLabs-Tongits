@@ -32,6 +32,8 @@ public class Game extends AppCompatActivity {
     ImageButton AI2DiscardView;
     ImageButton playerDiscardView;
 
+    Button makeHouseButton;
+    Button addHouseButton;
 
     ArrayList<Card> playerHand; //array to hold player's cards
     ArrayList<Card> playerDiscard; //player's discard pile - AI 1 takes from this
@@ -81,6 +83,8 @@ public class Game extends AppCompatActivity {
         AI2DiscardView = findViewById(R.id.AI2DiscardPile);
         playerDiscardView = findViewById(R.id.playerDiscardPile);
 
+        makeHouseButton = findViewById(R.id.makeHouseButton);
+        addHouseButton = findViewById(R.id.addHouseButton);
 
         //shuffle a few times for good measure
         for (int i = 0; i < 20; i++){
@@ -136,8 +140,6 @@ public class Game extends AppCompatActivity {
 
             }
         });
-
-
 
         AI1DiscardView.setOnLongClickListener(new View.OnLongClickListener() { //this is for the first AI view
             @Override
@@ -208,6 +210,27 @@ public class Game extends AppCompatActivity {
                 }
 
                 return true;
+            }
+        });
+
+        makeHouseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //must have selected at least 3 cards
+                if (SelectedCards.size() < 3)
+                    return;
+
+                if (!isValidHouse(SelectedCards))
+                    return;
+
+                houses.add(new House(SelectedCards));
+
+                for (int i = 0; i < SelectedCards.size(); i++)
+                    playerHand.remove(SelectedCards.get(i));
+
+                updateHand();
+                updateHouses();
+
             }
         });
 
@@ -303,15 +326,22 @@ public class Game extends AppCompatActivity {
                         }
 
                         // if nothing is selected, turn off selectMode
-                        if (SelectedCards.isEmpty())
+                        if (SelectedCards.isEmpty()) {
                             selectMode = false;
+                            makeHouseButton.setVisibility(View.GONE);
+                            addHouseButton.setVisibility(View.GONE);
+                        }
+
+                        if (SelectedCards.size() >= 3)
+                            makeHouseButton.setVisibility(View.VISIBLE);
+                        else
+                            makeHouseButton.setVisibility(View.GONE);
 
                         return;
 
                     }
                     // if not selecting, add card to player's discard
                     playerTurn = false;
-
                     playerDiscard.add(playerHand.remove(index/2));
                     updateDiscardPile(3);
                     AITurn(deckOfCards);
@@ -333,6 +363,8 @@ public class Game extends AppCompatActivity {
                         SelectedCards.clear();
                     }
                     selectMode = true;
+                    addHouseButton.setVisibility(View.VISIBLE);
+                    makeHouseButton.setVisibility(View.GONE);
                     int index = viewHand.indexOfChild(card);
                     SelectedCards.add(playerHand.get(index/2));
                     card.getBackground().setColorFilter(Color.argb(150, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
@@ -349,6 +381,7 @@ public class Game extends AppCompatActivity {
         for (int i = 0; i < houses.size(); i++){
             ImageButton card = new ImageButton(this);
             setNewCardImage(houses.get(i).returnTopCard().getSuit(),houses.get(i).returnTopCard().getValue(),card);
+            card.getBackground().setColorFilter(Color.argb(0, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
             card.setAdjustViewBounds(true);
             card.setLayoutParams(new LinearLayout.LayoutParams(258,400));
             HouseLayoutGameScreen.addView(card);

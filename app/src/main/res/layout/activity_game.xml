@@ -9,6 +9,46 @@
 
     //PAGE HEADER
 
+    <Button
+        android:id="@+id/makeHouseButton"
+        android:layout_width="115dp"
+        android:layout_height="45dp"
+        android:background="@drawable/play_button"
+        android:text="Set a House"
+        android:textColor="#FFFFFF"
+        android:textScaleX="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:visibility="gone"
+        app:fontFamily="@font/roboto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.759" />
+
+    <Button
+        android:id="@+id/addHouseButton"
+        android:layout_width="115dp"
+        android:layout_height="45dp"
+        android:background="@drawable/play_button"
+        android:text="Add to House"
+        android:textColor="#FFFFFF"
+        android:textScaleX="1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:visibility="gone"
+        app:fontFamily="@font/roboto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.68" />
+
     <TextView
         android:id="@+id/gameTitle"
         style="@style/HeaderText"
@@ -149,7 +189,7 @@
         android:layout_height="121dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.336"
+        app:layout_constraintHorizontal_bias="0.309"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.745"
