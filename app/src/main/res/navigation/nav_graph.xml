@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/mainActivity">
+
+    <fragment
+        android:id="@+id/instructions"
+        android:name="com.example.tongits.instructions"
+        android:label="activity_instructions"
+        tools:layout="@layout/activity_instructions" />
+    <fragment
+        android:id="@+id/game"
+        android:name="com.example.tongits.Game"
+        android:label="activity_game"
+        tools:layout="@layout/activity_game" />
+    <fragment
+        android:id="@+id/credits"
+        android:name="com.example.tongits.credits"
+        android:label="activity_credits"
+        tools:layout="@layout/activity_credits" />
+    <fragment
+        android:id="@+id/name"
+        android:name="com.example.tongits.name"
+        android:label="activity_name"
+        tools:layout="@layout/activity_name" />
+    <fragment
+        android:id="@+id/mainActivity"
+        android:name="com.example.tongits.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" >
+        <action
+            android:id="@+id/action_mainActivity_to_settings"
+            app:destination="@id/settings" />
+        <action
+            android:id="@+id/action_mainActivity_to_game"
+            app:destination="@id/game" />
+        <action
+            android:id="@+id/action_mainActivity_to_instructions"
+            app:destination="@id/instructions" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.example.tongits.settings"
+        android:label="activity_settings"
+        tools:layout="@layout/activity_settings" >
+        <action
+            android:id="@+id/action_settings_to_credits"
+            app:destination="@id/credits" />
+        <action
+            android:id="@+id/action_settings_to_name"
+            app:destination="@id/name" />
+    </fragment>
+</navigation>
