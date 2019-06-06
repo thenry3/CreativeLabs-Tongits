@@ -1044,6 +1044,9 @@ public class Game extends AppCompatActivity {
             }
         }
 
+        addHouseButton.setVisibility(View.GONE);
+        makeHouseButton.setVisibility(View.GONE);
+
         int playerPoints = calculatePoints(playerHand);
         int AI1Points = calculatePoints(AI1Hand);
         int AI2Points = calculatePoints(AI2Hand);
