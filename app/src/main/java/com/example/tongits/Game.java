@@ -125,6 +125,7 @@ public class Game extends AppCompatActivity {
         SelectedCards = new ArrayList<>();
 
         // update player hand view
+        Collections.sort(playerHand);
         updateHand();
 
         updateHouses(); //might interfere w/ update hand idk
@@ -136,6 +137,7 @@ public class Game extends AppCompatActivity {
                 if (playerDrawTurn && playerTurn && deckOfCards.getNumberOfCardsInDeck() > 0) {
                     playerHand.add(deckOfCards.topCard());
                     deckOfCards.removeCard();
+                    Collections.sort(playerHand);
                     updateHand();
                     playerDrawTurn = false;
                 }
@@ -147,6 +149,7 @@ public class Game extends AppCompatActivity {
             public void onClick(View v) {
                 if (playerDrawTurn && playerTurn && AI2Discard.size() > 0 && canDrawFromDiscard(playerHand, AI2Discard.get(AI2Discard.size() - 1))) {
                     playerHand.add(AI2Discard.remove(AI2Discard.size() - 1));
+                    Collections.sort(playerHand);
                     updateHand();
                     if (AI2Discard.isEmpty())
                         AI2DiscardView.setBackgroundResource(0);
@@ -578,6 +581,7 @@ public class Game extends AppCompatActivity {
 
         for (int i = 0; i < houses.size(); i++){
             final ImageButton card = new ImageButton(this);
+            Collections.sort(houses.get(i).card_house_list);
             setNewCardImage(houses.get(i).returnTopCard().getSuit(),houses.get(i).returnTopCard().getValue(),card);
             card.getBackground().setColorFilter(Color.argb(0, 0, 0 ,0), PorterDuff.Mode.SRC_ATOP);
             card.setAdjustViewBounds(true);
