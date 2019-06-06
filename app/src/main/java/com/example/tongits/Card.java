@@ -24,8 +24,8 @@ public class Card implements Comparable<Card>{
     }
 
     public int compareTo(Card other){
-        Integer s = suit;
-        Integer s1 = other.suit;
+        Integer s = value;
+        Integer s1 = other.value;
         return s.compareTo(s1);
     }
 
