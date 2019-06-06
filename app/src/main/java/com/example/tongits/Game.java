@@ -84,6 +84,7 @@ public class Game extends AppCompatActivity {
 
         DiscardPile = findViewById(R.id.discardPiles); //this line matters! links to the name of the linear layout in the XML file
         DiscardPilePage = findViewById(R.id.discardPilePage); //links to constraint layout that controls display of cards
+        DiscardPilePage.setBackgroundColor(Color.argb(170, 0, 0, 0));
         EndGamePage = findViewById(R.id.endGamePopup);
         endgameMessage = findViewById(R.id.gameStatus);
         pointsMessage = findViewById(R.id.points);
@@ -147,6 +148,19 @@ public class Game extends AppCompatActivity {
                     else
                         setNewCardImage(AI2Discard.get(AI2Discard.size() - 1).getSuit(), AI2Discard.get(AI2Discard.size() - 1).getValue(), AI2DiscardView);
                     playerDrawTurn = false;
+                }
+
+            }
+        });
+
+        DiscardPilePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                DiscardPilePage.setVisibility(View.GONE);
+                tracker1 = tracker2 = playertracker = 0;
+                if (activeAI1 || activeAI2 || activePlayer)
+                {
+                    activeAI2 = activeAI1 = activePlayer = false;
                 }
 
             }
@@ -270,6 +284,11 @@ public class Game extends AppCompatActivity {
     //finishes current activity (game screen) and returns to main menu
     public void onGameReturn (View view){
         finish();
+    }
+
+    public void restartGame (View view) {
+        Intent restart = new Intent(this, Game.class);
+        startActivity(restart);
     }
 
     void dealCards(Deck deck, ArrayList<Card> playerDeck, int numCards){
