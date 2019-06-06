@@ -363,7 +363,7 @@
             android:layout_width="190dp"
             android:layout_height="42dp"
             android:background="@drawable/play_button"
-            android:onClick="onGameReturn"
+            android:onClick="restartGame"
             android:text="P L A Y  A G A I N"
             android:textColor="#FFFFFF"
             android:textScaleX="1"
