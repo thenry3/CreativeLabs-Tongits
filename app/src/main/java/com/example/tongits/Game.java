@@ -1,19 +1,13 @@
 package com.example.tongits;
 
 
-import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
-import android.util.*;
 import java.util.*;
 import android.graphics.*;
-import android.support.constraint.*;
-import android.graphics.drawable.*;
-import android.support.v4.graphics.drawable.*;
 
 
 public class Game extends AppCompatActivity {
