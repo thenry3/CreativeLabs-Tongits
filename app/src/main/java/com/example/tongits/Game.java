@@ -28,6 +28,9 @@ public class Game extends AppCompatActivity {
     LinearLayout DiscardPile;
     ConstraintLayout DiscardPilePage;
 
+    LinearLayout  HouseCards;
+    ConstraintLayout HousePilePage;
+
     ConstraintLayout EndGamePage;
     TextView endgameMessage;
     TextView pointsMessage;
@@ -87,6 +90,9 @@ public class Game extends AppCompatActivity {
         EndGamePage = findViewById(R.id.endGamePopup);
         endgameMessage = findViewById(R.id.gameStatus);
         pointsMessage = findViewById(R.id.points);
+
+        HouseCards = findViewById(R.id.HouseCards);
+        HousePilePage = findViewById(R.id.HousePilePage);
 
         HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
 
@@ -177,7 +183,7 @@ public class Game extends AppCompatActivity {
         });
 
 
-        AI2DiscardView.setOnLongClickListener(new View.OnLongClickListener() { //this is for the first AI view
+        AI2DiscardView.setOnLongClickListener(new View.OnLongClickListener() { //this is for the second AI view
             @Override
             public boolean onLongClick(View v) {
                 updateDiscardPile(2);
@@ -588,10 +594,10 @@ public class Game extends AppCompatActivity {
                 }
             });
 
-            card.setOnLongClickListener(new View.OnLongClickListener() {
+            card.setOnLongClickListener(new View.OnLongClickListener() { //view the houses
                 @Override
                 public boolean onLongClick(View v) {
-                    // view cards in hand
+                    // put the cards in the arrayList which has "card" in a linear layout inside a horizontal scroll
                     return true;
 
                 }

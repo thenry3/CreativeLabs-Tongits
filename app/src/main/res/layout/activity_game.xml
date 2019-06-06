@@ -278,6 +278,7 @@
             </LinearLayout>
         </HorizontalScrollView>
 
+
         <TextView
             android:id="@+id/discardPileViewLabel"
             android:layout_width="match_parent"
@@ -293,6 +294,64 @@
             app:layout_constraintTop_toTopOf="@id/discardPileView" />
 
     </android.support.constraint.ConstraintLayout>
+
+    //HOUSE SCROLLING VIEW
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/HousePilePage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="#80E5E5E5"
+        android:backgroundTintMode="multiply"
+        android:visibility="gone">
+
+        <HorizontalScrollView
+            android:id="@+id/HouseScrollView"
+            android:layout_width="300dp"
+            android:layout_height="160dp"
+            android:background="@drawable/popupbg"
+            android:fadeScrollbars="true"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:scrollbarAlwaysDrawVerticalTrack="false"
+            android:scrollbars="none"
+            android:splitMotionEvents="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.443">
+
+
+            <LinearLayout
+                android:id="@+id/HouseCards"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="50dp">
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+        <TextView
+            android:id="@+id/HousesTextView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="H O U S E"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="@id/HouseScrollView"
+            app:layout_constraintRight_toRightOf="@id/HouseScrollView"
+            app:layout_constraintTop_toTopOf="@id/HouseScrollView" />
+
+    </android.support.constraint.ConstraintLayout>
+
 
     //END GAME SCREEN
     <android.support.constraint.ConstraintLayout
