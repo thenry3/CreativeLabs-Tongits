@@ -620,6 +620,8 @@ public class Game extends AppCompatActivity {
                     addMode = false;
 
                     addHouseButton.getBackground().setColorFilter(Color.argb(0, 0,0, 0), PorterDuff.Mode.SRC_ATOP);
+                    addHouseButton.setVisibility(View.GONE);
+                    makeHouseButton.setVisibility(View.GONE);
 
                     updateHand();
                     updateHouses();
