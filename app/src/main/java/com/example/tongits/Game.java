@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.*;
 import java.util.*;
 import android.graphics.*;
+import android.content.*;
 
 
 public class Game extends AppCompatActivity {
@@ -63,6 +64,8 @@ public class Game extends AppCompatActivity {
 
     boolean addMode = false;
 
+    ArrayList<Boolean> houseViews = new ArrayList<>();
+
 
 
     /*------------------------------------------------------------------*/
@@ -81,13 +84,15 @@ public class Game extends AppCompatActivity {
 
         DiscardPile = findViewById(R.id.discardPiles); //this line matters! links to the name of the linear layout in the XML file
         DiscardPilePage = findViewById(R.id.discardPilePage); //links to constraint layout that controls display of cards
-        DiscardPilePage.setBackgroundColor(Color.argb(170, 0, 0, 0));
+        DiscardPilePage.setBackgroundColor(Color.argb(180, 0, 0, 0));
         EndGamePage = findViewById(R.id.endGamePopup);
+        EndGamePage.setBackgroundColor(Color.argb(220, 0, 0, 0));
         endgameMessage = findViewById(R.id.gameStatus);
         pointsMessage = findViewById(R.id.points);
 
         HouseCards = findViewById(R.id.HouseCards);
         HousePilePage = findViewById(R.id.HousePilePage);
+        HousePilePage.setBackgroundColor(Color.argb(180, 0, 0, 0));
 
         HouseLayoutGameScreen = findViewById(R.id.HouseGrid);
 
@@ -163,6 +168,15 @@ public class Game extends AppCompatActivity {
                     activeAI2 = activeAI1 = activePlayer = false;
                 }
 
+            }
+        });
+
+        HousePilePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                HousePilePage.setVisibility(View.GONE);
+                for (int i = 0; i < houseViews.size(); i++)
+                    houseViews.set(i, false);
             }
         });
 
@@ -569,6 +583,7 @@ public class Game extends AppCompatActivity {
             card.setAdjustViewBounds(true);
             card.setLayoutParams(new LinearLayout.LayoutParams(193,300));
             HouseLayoutGameScreen.addView(card);
+            houseViews.add(false);
 
             View space = new Space (this);
             space.setLayoutParams(new LinearLayout.LayoutParams(100,100));
@@ -611,10 +626,49 @@ public class Game extends AppCompatActivity {
                 @Override
                 public boolean onLongClick(View v) {
                     // put the cards in the arrayList which has "card" in a linear layout inside a horizontal scroll
+                    int index = HouseLayoutGameScreen.indexOfChild(card);
+                    updateHousePile(houses.get(index / 2));
+                    boolean allFalse = true;
+
+                    houseViews.set(index / 2, !houseViews.get(index / 2));
+
+                    for (int i = 0; i < houseViews.size(); i++)
+                    {
+                        if (houseViews.get(i) == true) {
+                            allFalse = false;
+                            break;
+                        }
+                    }
+
+                    if (allFalse)
+                        HousePilePage.setVisibility(View.GONE);
+                    else {
+                        HousePilePage.setVisibility(View.VISIBLE);
+                        for (int i = 0; i < houseViews.size(); i++)
+                            houseViews.set(i, false);
+                        houseViews.set(index / 2, true);
+                    }
+
                     return true;
 
                 }
             });
+        }
+    }
+
+    void updateHousePile(House house) {
+        HouseCards.removeAllViews();
+        for (int i = 0; i < house.card_house_list.size(); i++)
+        {
+            ImageButton card = new ImageButton(this);
+            setNewCardImage(house.card_house_list.get(i).getSuit(), house.card_house_list.get(i).getValue(), card);
+            card.setAdjustViewBounds(true);
+            card.setLayoutParams(new LinearLayout.LayoutParams(180, 280));
+            HouseCards.addView(card);
+
+            View space = new Space(this);
+            space.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
+            HouseCards.addView(space);
         }
     }
 
