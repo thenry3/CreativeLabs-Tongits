@@ -104,7 +104,7 @@ public class Game extends AppCompatActivity {
         addHouseButton = findViewById(R.id.addHouseButton);
 
         //shuffle a few times for good measure
-        for (int i = 0; i < 20; i++){
+        for (int i = 0; i < 100; i++){
             deckOfCards.shuffleDeck();
         }
 
